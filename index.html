@@ -1,0 +1,1954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maria's Kitchen — Recipes & Stories</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lato:wght@300;400;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #fdf8f0;
+  --warm-white: #fffef9;
+  --terracotta: #c8603a;
+  --terracotta-light: #e07a54;
+  --terracotta-dark: #a04828;
+  --sage: #7a9b76;
+  --sage-light: #a8c4a4;
+  --charcoal: #2c2416;
+  --brown: #5a3e28;
+  --gold: #d4a843;
+  --gold-light: #f0c96a;
+  --light-gray: #f4ede2;
+  --border: #e8d8c4;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Lato', sans-serif;
+  background: var(--cream);
+  color: var(--charcoal);
+  min-height: 100vh;
+}
+/* NAV */
+nav {
+  background: var(--charcoal);
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(44,36,22,0.3);
+}
+.logo {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2rem;
+  color: var(--gold);
+  padding: 16px 0;
+  text-decoration: none;
+}
+.nav-links {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.nav-links a {
+  color: #d4c9b8;
+  text-decoration: none;
+  padding: 8px 18px;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 700;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.nav-links a:hover, .nav-links a.active {
+  color: var(--gold);
+  background: rgba(212,168,67,0.1);
+}
+.admin-btn-nav {
+  background: var(--terracotta) !important;
+  color: white !important;
+  padding: 8px 16px !important;
+  border-radius: 4px;
+  font-size: 0.8rem !important;
+}
+.admin-btn-nav:hover { background: var(--terracotta-dark) !important; }
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, var(--charcoal) 0%, var(--brown) 100%);
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1400&q=80') center/cover no-repeat;
+  opacity: 0.25;
+}
+.hero-content { position: relative; z-index: 1; max-width: 700px; padding: 40px 20px; }
+.hero-tag {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--charcoal);
+  padding: 6px 20px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  color: white;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+.hero p { color: #c8b89a; font-size: 1.15rem; line-height: 1.7; margin-bottom: 36px; }
+.hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--terracotta);
+  color: white;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-primary:hover { background: var(--terracotta-dark); transform: translateY(-2px); }
+.btn-secondary {
+  background: transparent;
+  color: white;
+  padding: 14px 32px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s;
+}
+.btn-secondary:hover { border-color: white; background: rgba(255,255,255,0.1); }
+
+/* SECTIONS */
+.section { display: none; }
+.section.active { display: block; }
+
+/* PAGE HEADER */
+.page-header {
+  background: var(--charcoal);
+  padding: 60px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.page-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.1;
+  background: repeating-linear-gradient(45deg, var(--gold) 0, var(--gold) 1px, transparent 0, transparent 50%) 0 0 / 20px 20px;
+}
+.page-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  color: white;
+  position: relative;
+}
+.page-header p { color: #a09080; margin-top: 12px; font-size: 1.1rem; position: relative; }
+
+/* CONTAINER */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* RECIPES GRID */
+.recipes-intro { padding: 60px 24px 20px; text-align: center; }
+.recipes-intro h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  color: var(--brown);
+  margin-bottom: 12px;
+}
+.recipes-intro p { color: #7a6a58; max-width: 600px; margin: 0 auto; font-size: 1.05rem; }
+.recipes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 28px;
+  padding: 40px 24px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.recipe-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(44,36,22,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+.recipe-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(44,36,22,0.15); }
+.recipe-img { width: 100%; height: 220px; object-fit: cover; }
+.recipe-body { padding: 20px; }
+.recipe-tag {
+  display: inline-block;
+  background: var(--light-gray);
+  color: var(--terracotta);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+.recipe-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  color: var(--charcoal);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.recipe-card p { color: #7a6a58; font-size: 0.9rem; line-height: 1.6; }
+.recipe-meta { display: flex; gap: 16px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.recipe-meta span { font-size: 0.8rem; color: #9a8878; }
+.recipe-meta strong { color: var(--charcoal); }
+
+/* EDIT BUTTON */
+.edit-btn {
+  background: var(--gold);
+  color: var(--charcoal);
+  border: none;
+  padding: 8px 18px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s;
+  margin-top: 12px;
+  display: none;
+}
+.edit-btn:hover { background: var(--gold-light); }
+.admin-mode .edit-btn { display: inline-block; }
+.save-btn {
+  background: var(--sage);
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s;
+  margin-top: 12px;
+  display: none;
+}
+.save-btn:hover { background: #5a7a56; }
+.cancel-edit-btn {
+  background: #ccc;
+  color: #333;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 12px;
+  margin-left: 8px;
+  display: none;
+}
+
+/* BLOGS */
+.blogs-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.blogs-controls h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: var(--brown);
+}
+.add-blog-btn {
+  background: var(--terracotta);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s;
+  display: none;
+}
+.admin-mode .add-blog-btn { display: inline-block; }
+.add-blog-btn:hover { background: var(--terracotta-dark); }
+.blogs-list {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.blog-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(44,36,22,0.08);
+}
+.blog-hero-img { width: 100%; height: 320px; object-fit: cover; }
+.blog-content { padding: 36px; }
+.blog-meta-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.blog-category {
+  background: var(--terracotta);
+  color: white;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.blog-date { color: #9a8878; font-size: 0.85rem; }
+.blog-card h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: var(--charcoal);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+.blog-card .author-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 2px solid var(--border);
+}
+.author-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--gold);
+}
+.author-info { font-size: 0.9rem; }
+.author-info strong { color: var(--charcoal); display: block; }
+.author-info span { color: #9a8878; }
+.blog-text { color: #4a3a2a; line-height: 1.85; font-size: 1rem; }
+.blog-text h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: var(--brown);
+  margin: 28px 0 12px;
+}
+.blog-text p { margin-bottom: 16px; }
+.blog-text ul { padding-left: 24px; margin-bottom: 16px; }
+.blog-text li { margin-bottom: 8px; }
+.blog-img-inline { width: 100%; border-radius: 8px; margin: 20px 0; height: 250px; object-fit: cover; }
+.key-takeaways {
+  background: var(--light-gray);
+  border-left: 4px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  padding: 24px;
+  margin: 28px 0;
+}
+.key-takeaways h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: var(--brown);
+  margin-bottom: 12px;
+}
+.key-takeaways ul { list-style: none; padding: 0; }
+.key-takeaways li { padding: 6px 0; padding-left: 20px; position: relative; color: #4a3a2a; }
+.key-takeaways li::before { content: '✦'; position: absolute; left: 0; color: var(--gold); font-size: 0.7rem; top: 9px; }
+.faq-section { margin-top: 32px; }
+.faq-section h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: var(--brown);
+  margin-bottom: 20px;
+}
+.faq-item { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 12px; overflow: hidden; }
+.faq-q {
+  padding: 16px 20px;
+  background: var(--warm-white);
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--charcoal);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.2s;
+}
+.faq-q:hover { background: var(--light-gray); }
+.faq-q span { font-size: 1.2rem; color: var(--terracotta); }
+.faq-a { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s; color: #5a4a38; line-height: 1.7; font-size: 0.95rem; }
+.faq-a.open { max-height: 300px; padding: 16px 20px; }
+.conclusion-box {
+  background: linear-gradient(135deg, var(--charcoal) 0%, var(--brown) 100%);
+  border-radius: 12px;
+  padding: 32px;
+  margin-top: 32px;
+  color: white;
+}
+.conclusion-box h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.conclusion-box p { color: #c8b89a; line-height: 1.8; }
+.blog-edit-btns { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+
+/* ABOUT */
+.about-section { max-width: 1000px; margin: 0 auto; padding: 60px 24px; }
+.about-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  margin-bottom: 60px;
+}
+.about-img-wrap { position: relative; }
+.about-img-wrap img { width: 100%; border-radius: 12px; box-shadow: 0 20px 60px rgba(44,36,22,0.2); }
+.about-img-wrap::before {
+  content: '';
+  position: absolute;
+  top: -16px; left: -16px; right: 16px; bottom: 16px;
+  border: 3px solid var(--gold);
+  border-radius: 12px;
+  z-index: -1;
+}
+.about-text h2 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.2rem;
+  color: var(--terracotta);
+  margin-bottom: 8px;
+}
+.about-text h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  color: var(--charcoal);
+  margin-bottom: 20px;
+  line-height: 1.1;
+}
+.about-text p { color: #5a4a38; line-height: 1.8; margin-bottom: 16px; }
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 24px;
+  background: var(--charcoal);
+  border-radius: 12px;
+  padding: 36px;
+  margin-bottom: 48px;
+  text-align: center;
+}
+.stat-item h3 { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--gold); }
+.stat-item p { color: #a09080; font-size: 0.9rem; margin-top: 4px; }
+.about-values {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
+  gap: 24px;
+}
+.value-card {
+  background: white;
+  border-radius: 12px;
+  padding: 28px;
+  border-top: 4px solid var(--terracotta);
+  box-shadow: 0 4px 20px rgba(44,36,22,0.06);
+}
+.value-card img { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; margin-bottom: 16px; }
+.value-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: var(--charcoal);
+  margin-bottom: 8px;
+}
+.value-card p { color: #7a6a58; font-size: 0.9rem; line-height: 1.6; }
+
+/* CONTACT */
+.contact-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 60px 24px;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 60px;
+}
+.contact-info h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: var(--charcoal);
+  margin-bottom: 16px;
+}
+.contact-info p { color: #7a6a58; line-height: 1.7; margin-bottom: 28px; }
+.contact-detail { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px; }
+.contact-detail img { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
+.contact-detail strong { color: var(--charcoal); display: block; margin-bottom: 4px; }
+.contact-detail span { color: #7a6a58; font-size: 0.9rem; }
+.contact-form { background: white; border-radius: 16px; padding: 40px; box-shadow: 0 4px 24px rgba(44,36,22,0.08); }
+.contact-form h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--charcoal); margin-bottom: 24px; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; font-size: 0.85rem; font-weight: 700; color: var(--charcoal); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+.form-group input, .form-group textarea, .form-group select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.95rem;
+  color: var(--charcoal);
+  background: var(--cream);
+  transition: border-color 0.3s;
+  outline: none;
+}
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--terracotta); }
+.form-group textarea { height: 130px; resize: vertical; }
+.submit-btn {
+  background: var(--terracotta);
+  color: white;
+  border: none;
+  padding: 14px 36px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.submit-btn:hover { background: var(--terracotta-dark); }
+
+/* MODAL */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  display: none;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: white;
+  border-radius: 16px;
+  max-width: 700px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 40px;
+}
+.modal h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: var(--charcoal);
+  margin-bottom: 24px;
+}
+.modal-close {
+  float: right;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #aaa;
+  line-height: 1;
+  margin-top: -8px;
+}
+.modal-close:hover { color: var(--charcoal); }
+.editor-tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+.editor-tab {
+  padding: 8px 20px;
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.85rem;
+  background: var(--cream);
+  color: var(--charcoal);
+  transition: all 0.2s;
+}
+.editor-tab.active {
+  background: var(--terracotta);
+  border-color: var(--terracotta);
+  color: white;
+}
+.editor-panel { display: none; }
+.editor-panel.active { display: block; }
+.editor-panel textarea {
+  width: 100%;
+  height: 200px;
+  padding: 12px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  resize: vertical;
+  outline: none;
+}
+.editor-panel textarea:focus { border-color: var(--terracotta); }
+.modal-actions { display: flex; gap: 12px; margin-top: 20px; }
+.modal-save {
+  background: var(--terracotta);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.modal-cancel {
+  background: #eee;
+  color: #666;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ADMIN LOGIN */
+.admin-login-modal .modal { max-width: 400px; }
+.admin-badge {
+  background: var(--terracotta);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-left: 12px;
+  display: none;
+}
+.admin-mode .admin-badge { display: inline-block; }
+
+/* FOOTER */
+footer {
+  background: var(--charcoal);
+  color: #9a8878;
+  text-align: center;
+  padding: 40px 24px;
+  margin-top: 60px;
+}
+footer strong { color: var(--gold); font-family: 'Dancing Script', cursive; font-size: 1.3rem; }
+footer p { margin-top: 12px; font-size: 0.9rem; }
+.admin-bar {
+  background: var(--terracotta-dark);
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-size: 0.85rem;
+  display: none;
+}
+.admin-mode .admin-bar { display: block; }
+.logout-btn {
+  background: rgba(255,255,255,0.2);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.4);
+  padding: 4px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  margin-left: 12px;
+}
+.editable-field {
+  border: 2px dashed var(--gold);
+  border-radius: 6px;
+  padding: 4px 8px;
+  cursor: text;
+  min-height: 24px;
+}
+.read-only .editable-field { border-color: transparent; cursor: default; }
+body.read-only .editable-field { border-color: transparent !important; cursor: default !important; }
+[contenteditable="true"] {
+  outline: none;
+  border: 2px dashed var(--gold) !important;
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+[contenteditable="false"] { border: none !important; }
+@media(max-width:768px){
+  .about-hero { grid-template-columns: 1fr; }
+  .contact-section { grid-template-columns: 1fr; }
+  .about-stats { grid-template-columns: repeat(2,1fr); }
+}
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: var(--sage);
+  color: white;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-weight: 700;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+
+<!-- ADMIN BAR -->
+<div class="admin-bar">
+  🔐 Admin Mode Active — You can edit all content and add blogs
+  <button class="logout-btn" onclick="logout()">Logout</button>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#" onclick="showSection('home')">Maria's Kitchen</a>
+  <div class="nav-links">
+    <a onclick="showSection('home')" class="active" id="nav-home">Home</a>
+    <a onclick="showSection('recipes')" id="nav-recipes">Recipes</a>
+    <a onclick="showSection('blogs')" id="nav-blogs">Blogs</a>
+    <a onclick="showSection('about')" id="nav-about">About</a>
+    <a onclick="showSection('contact')" id="nav-contact">Contact</a>
+    <a onclick="showAdminLogin()" class="admin-btn-nav" id="admin-nav-btn">Admin</a>
+    <span class="admin-badge" id="admin-badge">Admin</span>
+  </div>
+</nav>
+
+<!-- HOME SECTION -->
+<div class="section active" id="section-home">
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">✦ Welcome to My Kitchen</div>
+      <h1>Cook with Love,<br>Eat with Joy</h1>
+      <p>Authentic recipes, culinary stories, and kitchen wisdom from Maria Kanwal's home kitchen to yours.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="showSection('recipes')">Explore Recipes</button>
+        <button class="btn-secondary" onclick="showSection('blogs')">Read Blogs</button>
+      </div>
+    </div>
+  </div>
+  <!-- Featured recipes on home -->
+  <div style="padding:60px 24px; max-width:1200px;margin:0 auto;">
+    <h2 style="font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--brown);margin-bottom:8px;">Featured This Week</h2>
+    <p style="color:#7a6a58;margin-bottom:32px;">Handpicked by Maria — recipes that are sure to delight</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;">
+      <div class="recipe-card" onclick="showSection('recipes')">
+        <img class="recipe-img" src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&q=80" alt="Pizza">
+        <div class="recipe-body">
+          <span class="recipe-tag">Italian</span>
+          <h3>Classic Margherita Pizza</h3>
+          <p>A timeless classic with fresh mozzarella and basil on a hand-tossed crust.</p>
+          <div class="recipe-meta"><span>⏱ <strong>35 min</strong></span><span>👤 <strong>4 servings</strong></span></div>
+        </div>
+      </div>
+      <div class="recipe-card" onclick="showSection('recipes')">
+        <img class="recipe-img" src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&q=80" alt="Salad">
+        <div class="recipe-body">
+          <span class="recipe-tag">Healthy</span>
+          <h3>Mediterranean Quinoa Bowl</h3>
+          <p>Fresh, vibrant, and packed with nutrients for the perfect weekday lunch.</p>
+          <div class="recipe-meta"><span>⏱ <strong>20 min</strong></span><span>👤 <strong>2 servings</strong></span></div>
+        </div>
+      </div>
+      <div class="recipe-card" onclick="showSection('recipes')">
+        <img class="recipe-img" src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=500&q=80" alt="Pancakes">
+        <div class="recipe-body">
+          <span class="recipe-tag">Breakfast</span>
+          <h3>Fluffy Buttermilk Pancakes</h3>
+          <p>Golden, pillowy pancakes with maple syrup — the perfect lazy Sunday breakfast.</p>
+          <div class="recipe-meta"><span>⏱ <strong>25 min</strong></span><span>👤 <strong>4 servings</strong></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RECIPES SECTION -->
+<div class="section" id="section-recipes">
+  <div class="page-header">
+    <h1>Recipe Collection</h1>
+    <p>Over 50+ carefully tested recipes by Maria Kanwal</p>
+  </div>
+  <div class="recipes-intro">
+    <h2 id="recipes-heading" contenteditable="false">All Recipes</h2>
+    <p id="recipes-subheading" contenteditable="false">From weeknight dinners to weekend feasts — every recipe crafted with love and tested to perfection.</p>
+    <div style="margin-top:16px;">
+      <button class="edit-btn" onclick="toggleEdit('recipes-heading','recipes-subheading')">✏️ Edit Section</button>
+      <button class="save-btn" id="save-recipes-section" onclick="saveEdit('recipes-heading','recipes-subheading','save-recipes-section','edit-btn-0')">💾 Save Changes</button>
+    </div>
+  </div>
+  <div class="recipes-grid" id="recipes-grid">
+    <!-- Generated by JS -->
+  </div>
+</div>
+
+<!-- BLOGS SECTION -->
+<div class="section" id="section-blogs">
+  <div class="page-header">
+    <h1>Kitchen Stories</h1>
+    <p>Deep-dive articles on cooking techniques, ingredients, and culinary culture</p>
+  </div>
+  <div class="blogs-controls">
+    <h2>All Articles <span style="color:#9a8878;font-size:1rem;font-weight:400;">(20 articles)</span></h2>
+    <button class="add-blog-btn" onclick="openAddBlogModal()">+ Add New Blog</button>
+  </div>
+  <div class="blogs-list" id="blogs-list">
+    <!-- Generated by JS -->
+  </div>
+</div>
+
+<!-- ABOUT SECTION -->
+<div class="section" id="section-about">
+  <div class="page-header">
+    <h1>About Maria</h1>
+    <p>The story behind the kitchen</p>
+  </div>
+  <div class="about-section">
+    <div class="about-hero">
+      <div class="about-img-wrap">
+        <img src="https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=600&q=80" alt="Maria in kitchen">
+      </div>
+      <div class="about-text">
+        <h2>Hello, I'm</h2>
+        <h1 id="about-name" contenteditable="false">Maria Kanwal</h1>
+        <p id="about-bio1" contenteditable="false">I'm a passionate home cook and food writer who believes that great food doesn't have to be complicated. With over a decade of cooking experience, I've learned that the best meals come from simple, quality ingredients prepared with care and intention.</p>
+        <p id="about-bio2" contenteditable="false">My culinary journey started in my grandmother's kitchen in Lahore, where the aromas of cardamom, saffron, and slow-cooked curries were part of everyday life. That early exposure to bold, authentic flavors shaped everything I create today.</p>
+        <p id="about-bio3" contenteditable="false">Through this blog, I share recipes that bridge cultures — from traditional South Asian cooking to Mediterranean classics and modern fusion dishes. Every recipe comes with stories, tips, and the kind of detail that makes you feel confident in the kitchen.</p>
+        <div style="margin-top:20px;">
+          <button class="edit-btn" onclick="enableAboutEdit()">✏️ Edit Bio</button>
+          <button class="save-btn" id="save-about-btn" style="display:none;" onclick="saveAbout()">💾 Save</button>
+          <button class="cancel-edit-btn" id="cancel-about-btn" onclick="cancelAbout()">Cancel</button>
+        </div>
+        <button class="btn-primary" style="margin-top:20px;" onclick="showSection('contact')">Get in Touch</button>
+      </div>
+    </div>
+    <div class="about-stats">
+      <div class="stat-item">
+        <h3 id="stat1" contenteditable="false">200+</h3>
+        <p>Recipes Published</p>
+      </div>
+      <div class="stat-item">
+        <h3 id="stat2" contenteditable="false">50K+</h3>
+        <p>Monthly Readers</p>
+      </div>
+      <div class="stat-item">
+        <h3 id="stat3" contenteditable="false">12</h3>
+        <p>Years of Cooking</p>
+      </div>
+    </div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--brown);margin-bottom:24px;">My Values</h2>
+    <div class="about-values">
+      <div class="value-card">
+        <img src="https://images.unsplash.com/photo-1506368249639-73a05d6f6488?w=200&q=80" alt="Fresh ingredients">
+        <h3>Fresh Ingredients</h3>
+        <p>I believe in sourcing seasonal, local ingredients whenever possible. Quality produce makes all the difference.</p>
+      </div>
+      <div class="value-card">
+        <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=200&q=80" alt="Simple techniques">
+        <h3>Simple Techniques</h3>
+        <p>Cooking should be accessible. I break down complex techniques into simple, repeatable steps anyone can master.</p>
+      </div>
+      <div class="value-card">
+        <img src="https://images.unsplash.com/photo-1528712306091-ed0763094c98?w=200&q=80" alt="Family food">
+        <h3>Family at Heart</h3>
+        <p>Food is best when shared. Every recipe I create is meant to bring people around the table together.</p>
+      </div>
+      <div class="value-card">
+        <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=200&q=80" alt="Healthy eating">
+        <h3>Balanced Living</h3>
+        <p>I believe in enjoying all foods with mindfulness — indulgence and nutrition can coexist beautifully.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT SECTION -->
+<div class="section" id="section-contact">
+  <div class="page-header">
+    <h1>Get In Touch</h1>
+    <p>I'd love to hear from you — recipe questions, collaborations, or just to say hello!</p>
+  </div>
+  <div class="contact-section">
+    <div class="contact-info">
+      <h2 id="contact-heading" contenteditable="false">Let's Connect</h2>
+      <p id="contact-desc" contenteditable="false">Whether you have a question about a recipe, want to collaborate, or simply want to share your cooking experience — my inbox is always open.</p>
+      <button class="edit-btn" style="margin-bottom:20px;" onclick="enableContactEdit()">✏️ Edit</button>
+      <button class="save-btn" id="save-contact-btn" style="margin-bottom:20px;" onclick="saveContact()">💾 Save</button>
+      <button class="cancel-edit-btn" id="cancel-contact-btn" style="margin-bottom:20px;" onclick="cancelContact()">Cancel</button>
+      <div class="contact-detail">
+        <img src="https://images.unsplash.com/photo-1596524430615-b46475ddff6e?w=100&q=80" alt="Email">
+        <div>
+          <strong>Email</strong>
+          <span id="contact-email" contenteditable="false">maria@mariaskitchen.com</span>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=100&q=80" alt="Social">
+        <div>
+          <strong>Social Media</strong>
+          <span id="contact-social" contenteditable="false">@mariaskitchen on Instagram & Pinterest</span>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=100&q=80" alt="Location">
+        <div>
+          <strong>Based in</strong>
+          <span id="contact-location" contenteditable="false">Lahore, Pakistan 🌍</span>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <h3>Send a Message</h3>
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" placeholder="Enter your name">
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label>Subject</label>
+        <select>
+          <option>Recipe Question</option>
+          <option>Collaboration</option>
+          <option>Feedback</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="Your message here..."></textarea>
+      </div>
+      <button class="submit-btn" onclick="submitContact()">Send Message</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <strong>Maria's Kitchen</strong>
+  <p>© 2024 Maria Kanwal. All rights reserved. Made with ❤️ and a pinch of love.</p>
+</footer>
+
+<!-- ADMIN LOGIN MODAL -->
+<div class="modal-overlay" id="admin-login-modal">
+  <div class="modal" style="max-width:400px;">
+    <button class="modal-close" onclick="closeAdminLogin()">×</button>
+    <h2>Admin Access</h2>
+    <p style="color:#7a6a58;margin-bottom:24px;">Enter your password to access admin controls.</p>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="admin-password" placeholder="Enter password" onkeydown="if(event.key==='Enter')attemptLogin()">
+    </div>
+    <div style="display:flex;gap:12px;">
+      <button class="modal-save" onclick="attemptLogin()">Login</button>
+      <button class="modal-cancel" onclick="closeAdminLogin()">Cancel</button>
+    </div>
+    <p style="color:#aaa;font-size:0.8rem;margin-top:16px;">Hint: password is <code>mariakitchen2024</code></p>
+  </div>
+</div>
+
+<!-- ADD BLOG MODAL -->
+<div class="modal-overlay" id="add-blog-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeAddBlog()">×</button>
+    <h2>Add New Blog Post</h2>
+    <div class="form-group">
+      <label>Blog Title</label>
+      <input type="text" id="new-blog-title" placeholder="Enter blog title">
+    </div>
+    <div class="form-group">
+      <label>Category</label>
+      <input type="text" id="new-blog-category" placeholder="e.g. Baking, Healthy, Italian">
+    </div>
+    <div class="form-group">
+      <label>Cover Image URL (from Unsplash or any direct image URL)</label>
+      <input type="text" id="new-blog-img" placeholder="https://images.unsplash.com/...">
+    </div>
+    <div class="editor-tabs">
+      <button class="editor-tab active" onclick="switchEditorTab('visual')">✍️ Visual Editor</button>
+      <button class="editor-tab" onclick="switchEditorTab('code')">💻 Code / HTML</button>
+    </div>
+    <div class="editor-panel active" id="panel-visual">
+      <div class="form-group">
+        <label>Blog Content (write your blog text here)</label>
+        <textarea id="new-blog-text" placeholder="Write your blog content here...&#10;&#10;You can use multiple paragraphs. Separate sections with blank lines." style="height:250px;font-family:'Lato',sans-serif;"></textarea>
+      </div>
+    </div>
+    <div class="editor-panel" id="panel-code">
+      <div class="form-group">
+        <label>Blog Content (HTML)</label>
+        <textarea id="new-blog-html" placeholder="&lt;h3&gt;Introduction&lt;/h3&gt;&#10;&lt;p&gt;Your content here...&lt;/p&gt;" style="height:250px;"></textarea>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="modal-save" onclick="addNewBlog()">Publish Blog</button>
+      <button class="modal-cancel" onclick="closeAddBlog()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">Changes saved!</div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const ADMIN_PASSWORD = 'mariakitchen2024';
+let isAdmin = false;
+
+const recipes = [
+  { img:'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&q=80', tag:'Italian', name:'Classic Margherita Pizza', desc:'A timeless Italian classic with fresh mozzarella, basil and San Marzano tomato sauce on a hand-tossed crust.', time:'35 min', servings:'4' },
+  { img:'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&q=80', tag:'Healthy', name:'Mediterranean Quinoa Bowl', desc:'Fresh, vibrant and packed with nutrients — roasted veggies, feta, olives and hummus on a quinoa base.', time:'20 min', servings:'2' },
+  { img:'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=500&q=80', tag:'Breakfast', name:'Fluffy Buttermilk Pancakes', desc:'Golden, pillowy stacks with maple syrup and fresh berries for the perfect weekend breakfast.', time:'25 min', servings:'4' },
+  { img:'https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=500&q=80', tag:'Asian', name:'Chicken Pad Thai', desc:'Street-food style pad thai with rice noodles, crunchy peanuts, lime and a perfectly balanced sweet-tangy sauce.', time:'30 min', servings:'3' },
+  { img:'https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?w=500&q=80', tag:'Dessert', name:'Chocolate Lava Cake', desc:'Decadently rich chocolate molten cakes with a gooey center — perfect for dinner parties and date nights.', time:'20 min', servings:'4' },
+  { img:'https://images.unsplash.com/photo-1484980972926-edee96e0960d?w=500&q=80', tag:'Salads', name:'Caesar Salad Supreme', desc:'Crisp romaine, house-made croutons and a bold anchovy-parmesan dressing — a timeless restaurant-quality salad.', time:'15 min', servings:'4' },
+  { img:'https://images.unsplash.com/photo-1547592180-85f173990554?w=500&q=80', tag:'Soup', name:'Roasted Tomato Bisque', desc:'Deeply flavorful oven-roasted tomato soup with cream, fresh basil and sourdough croutons.', time:'50 min', servings:'6' },
+  { img:'https://images.unsplash.com/photo-1536304929831-ee1ca9d44906?w=500&q=80', tag:'South Asian', name:'Butter Chicken Masala', desc:"Rich, creamy and perfectly spiced — this is Maria's most-requested recipe, straight from her family's kitchen.", time:'60 min', servings:'5' },
+  { img:'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&q=80', tag:'Italian', name:'Homemade Spaghetti Carbonara', desc:'The authentic Roman way — eggs, guanciale, pecorino and black pepper. No cream needed.', time:'25 min', servings:'2' },
+  { img:'https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=500&q=80', tag:'Burgers', name:'Gourmet Beef Burger', desc:'Juicy brioche-bun burgers with caramelized onions, special sauce and a stack of toppings.', time:'30 min', servings:'4' },
+  { img:'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=500&q=80', tag:'Grilling', name:'Honey Garlic Ribs', desc:'Fall-off-the-bone tender pork ribs glazed with a sticky honey-garlic-soy sauce. Weekend BBQ essential.', time:'3 hrs', servings:'6' },
+  { img:'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&q=80', tag:'Baking', name:'Artisan Sourdough Bread', desc:'A rustic, crusty sourdough with an airy open crumb. Takes time but is completely worth every minute.', time:'24 hrs', servings:'10' },
+];
+
+const blogs = [
+  {
+    id:1, title:'The Art of Bread Making: From Starter to Sourdough Perfection',
+    category:'Baking', date:'December 1, 2024',
+    img:'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=900&q=80',
+    inlineImg:'https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=800&q=80',
+    content: `<p>Bread making is one of humanity's oldest and most rewarding culinary traditions. Long before modern kitchens with their electric mixers and perfectly calibrated ovens, our ancestors were mixing flour and water, waiting patiently for fermentation, and baking loaves over open flames. There is something deeply primal and satisfying about transforming a few humble ingredients into a golden, crusty loaf of bread.</p>
+    <h3>The Magic of Wild Fermentation</h3>
+    <p>At the heart of sourdough bread making lies a living culture — a community of wild yeasts and beneficial bacteria that transform flour and water into something extraordinary. Unlike commercial yeast, which provides a quick and predictable rise, sourdough starter is a dynamic ecosystem that evolves over time, developing complex flavors and aromas that you simply cannot replicate any other way.</p>
+    <p>Creating your own sourdough starter requires nothing more than flour, water, and time. You mix equal parts whole wheat flour and water in a jar and wait. Within a day or two, if you're lucky and your kitchen is warm enough, you'll notice bubbles beginning to form — a sign that wild yeasts from the air and the flour itself are beginning to colonize your mixture. This process, called inoculation, is the very beginning of your sourdough journey.</p>
+    <p>Over the following week, you feed your starter daily by discarding half and adding fresh flour and water. This regular feeding keeps the culture active and healthy, and gradually the starter becomes more predictable, more bubbly, and more flavorful. When it reliably doubles in size within four to eight hours of feeding, it's ready to bake with.</p>
+    <h3>Understanding Fermentation Time</h3>
+    <p>One of the most important lessons in sourdough baking is that time is your friend. The long, slow fermentation that sourdough undergoes during bulk fermentation and proofing does far more than simply cause the dough to rise. The acids produced by the bacteria tenderize the gluten, break down phytic acid, and develop flavor compounds that give sourdough its characteristic tang and complexity.</p>
+    <p>Temperature plays a crucial role in controlling fermentation speed. A warm kitchen will speed things up, while a cold one will slow them down dramatically. Many experienced bakers use the refrigerator for the final proof, a technique called retarding, which not only gives them greater scheduling flexibility but also enhances sour flavor development.</p>
+    <p>Reading your dough is a skill that takes practice. You're looking for a dough that has increased in volume, become lighter and more airy, and is covered with visible bubbles. When you gently press the dough, it should spring back slowly — a sign that the gluten structure is properly developed and the fermentation is on track.</p>
+    <h3>The Shaping Process</h3>
+    <p>Shaping is where many home bakers struggle, and it's understandable. Sourdough dough is often quite wet and sticky, and the shaping technique requires a delicate touch. The goal is to create surface tension in the dough — a tight outer skin that will help the loaf maintain its shape during baking and give you a beautiful open crumb.</p>
+    <p>The key is to work quickly and confidently. Flour your work surface lightly — too much flour will prevent the dough from gripping the surface, which is what you need to build tension. Using a bench scraper and your hands working in tandem, you drag and rotate the dough, building up surface tension with each movement.</p>
+    <p>Once shaped, the dough goes into a well-floured proofing basket, called a banneton, seam-side up. The banneton supports the shape of the loaf during the final proof and imprints those beautiful spiral rings on the surface of your bread. Cover it loosely and refrigerate overnight, or proof at room temperature for one to four hours.</p>
+    <h3>The Perfect Bake</h3>
+    <p>Baking sourdough requires high heat and steam — a combination that produces the characteristic thin, shattering crust and dramatic oven spring that every sourdough baker dreams of. A Dutch oven is the home baker's secret weapon here. Preheating it in a very hot oven, then baking the dough inside it with the lid on for the first 20 minutes, traps the steam released by the dough itself, creating the perfect baking environment.</p>
+    <p>After removing the lid, the crust browns and crisps beautifully as the internal temperature rises to around 210°F. Resist the urge to cut into your bread immediately — it needs at least an hour to finish cooking internally and for the crumb to set properly. The crackling sound of a cooling sourdough loaf is one of the most satisfying sounds in the kitchen.</p>`,
+    takeaways:['Feed your starter at consistent intervals for best results','Temperature controls fermentation speed — use a thermometer','Wet dough is normal; trust the process and develop your shaping technique','Steam in the first phase of baking is essential for crust development','Let the bread cool fully before slicing to avoid a gummy crumb'],
+    faqs:[
+      {q:'How long does it take to create a sourdough starter from scratch?',a:'Typically 5 to 7 days before your starter is active and ready to use for baking. Some climates and flour types may take up to 14 days.'},
+      {q:'Why is my sourdough bread not rising?',a:'Common causes include an underripe starter, dough that is too cold, or overfermentation. Make sure your starter passes the float test before using it.'},
+      {q:'Can I use all-purpose flour instead of bread flour?',a:'Yes, but bread flour has more protein and will give you a chewier crumb and better gluten development. All-purpose works but may produce a denser loaf.'},
+      {q:'What hydration level should I start with as a beginner?',a:'Start with 70-75% hydration. As you improve your shaping skills, you can gradually increase to 80-85% for a more open crumb.'},
+      {q:'How should I store sourdough bread?',a:"Never refrigerate sourdough — it stales faster in the fridge. Store cut-side down at room temperature for 2-3 days, or freeze sliced bread for up to 3 months."},
+    ],
+    conclusion:'Sourdough bread making is a journey that rewards patience, observation, and practice. Every loaf teaches you something new about fermentation, dough handling, and the beautiful alchemy of flour, water, salt, and time. Start your starter today and embrace the process — the loaves you bake will only get better and more delicious with every bake.'
+  },
+  {
+    id:2, title:'Mastering the Art of Spices: A Complete Guide to Flavor Building',
+    category:'Techniques', date:'November 28, 2024',
+    img:'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=900&q=80',
+    inlineImg:'https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?w=800&q=80',
+    content:`<p>Spices are the soul of cooking. They have the power to transform the most basic ingredients into dishes that are complex, aromatic, and deeply satisfying. Yet for many home cooks, spices remain a source of confusion and intimidation. How much should I use? When should I add them? Can I substitute one for another? These are questions that, once answered, will unlock an entirely new dimension of your cooking.</p>
+    <h3>Understanding Spice Families</h3>
+    <p>Before diving into individual spices, it helps to understand that spices generally fall into a few broad flavor families: warm spices like cinnamon, cloves, and allspice that evoke sweetness and depth; bright, citrusy spices like coriander and cardamom; earthy, robust spices like cumin and turmeric; pungent spices like fenugreek and mustard; and heat-providing spices like cayenne, black pepper, and various dried chilies.</p>
+    <p>Understanding which family a spice belongs to helps you make substitutions intelligently and build flavor combinations that make sense. You wouldn't typically use cinnamon where you need a spice's heat, just as you wouldn't reach for cayenne when a recipe calls for warm aromatic depth.</p>
+    <h3>The Importance of Blooming Spices</h3>
+    <p>One of the single most impactful techniques you can adopt to dramatically improve your cooking is blooming — briefly cooking whole or ground spices in hot fat before adding other ingredients. This process, used extensively in South Asian, Middle Eastern, and Mexican cuisines, dramatically amplifies the aromatic compounds in spices.</p>
+    <p>When you heat whole spices in oil, you're essentially performing an infusion. Fat-soluble flavor compounds dissolve into the oil, which then distributes these flavors throughout every element of your dish as you cook. The result is a much more integrated, complex flavor profile compared to spices simply stirred in at the end.</p>
+    <p>For ground spices, blooming must be done carefully — they can burn quickly. Add them to the hot oil, stir constantly, and cook for no more than 30 to 60 seconds until fragrant. You'll know they're ready when your kitchen fills with their aroma and the color of the oil begins to deepen.</p>
+    <h3>Whole vs. Ground: When to Use Each</h3>
+    <p>Both whole and ground spices have their place, and understanding when to use each is key to mastering spice usage. Whole spices release their flavor more slowly and are ideal for long-cooked dishes like braises, stocks, and stews, where they have time to gently perfume the liquid over hours of cooking. They also add pleasant texture and can be used as aromatics that are removed before serving.</p>
+    <p>Ground spices, on the other hand, provide immediate, intense flavor and are better suited for rubs, marinades, quick sautés, and dishes where you want spice flavor distributed evenly and rapidly throughout. The trade-off is that ground spices lose their potency much faster than whole ones — typically within six months to a year after grinding.</p>
+    <p>For the best of both worlds, buy whole spices and grind them yourself as needed using a dedicated spice grinder or a mortar and pestle. The difference in aroma and flavor between freshly ground and pre-ground spice is remarkable and will make a noticeable difference in your dishes.</p>
+    <h3>Building a Balanced Spice Blend</h3>
+    <p>Many of the world's greatest dishes derive their character from spice blends — garam masala, ras el hanout, baharat, Chinese five spice, and countless others. Creating your own blends allows you to customize flavors to your exact preference and ensures freshness.</p>
+    <p>The key to a balanced blend is thinking in layers: a base of warm, earthy spices for depth; bright, aromatic spices for complexity; a small amount of heat; and perhaps a touch of something unusual that makes your blend distinctively yours. Taste as you go and adjust ratios thoughtfully.</p>
+    <p>Always toast whole spices before grinding them into a blend — this deepens their flavor significantly. Toast in a dry pan over medium heat, stirring constantly, until fragrant and just beginning to color. Transfer immediately to a cool surface to prevent burning.</p>`,
+    takeaways:['Bloom spices in fat to maximize their flavor impact','Store spices in airtight containers away from heat and light','Whole spices stay fresh longer than ground — grind your own for best results','Balance spice blends with warm, bright, earthy, and pungent elements','Taste and adjust spice levels throughout the cooking process'],
+    faqs:[
+      {q:'How can I tell if my spices have gone bad?',a:'Rub a small amount between your fingers and smell it. If the aroma is faint or musty rather than vibrant and pungent, the spice has lost its potency and should be replaced.'},
+      {q:'Should I always bloom spices in oil?',a:'Not always. Some dishes call for dry toasting, others for adding spices to wet ingredients. Blooming in oil is best for dishes where oil is already a cooking medium.'},
+      {q:'How do I fix a dish that is too spicy?',a:'Add dairy (yogurt, cream, coconut milk), fat, or acidity (lemon juice, vinegar) to balance heat. Starches like potato or bread can also absorb some spice.'},
+      {q:'What are the most essential spices for a beginner cook?',a:'Start with cumin, coriander, turmeric, paprika, cinnamon, black pepper, and chili powder. These seven spices will cover an enormous range of global cuisines.'},
+      {q:'Can I substitute fresh spices for dried ones?',a:"Yes, typically you use three times the amount of fresh herb compared to dried (e.g., 1 tsp dried = 1 tbsp fresh). For spices rather than herbs, fresh and dried versions often differ too significantly to substitute directly."},
+    ],
+    conclusion:'Mastering spices is a lifelong pursuit that pays enormous dividends every time you cook. Start by building your pantry with fresh, quality spices, learn the basic techniques of blooming and toasting, and experiment boldly. Your dishes will take on a depth and complexity that will delight everyone who sits at your table.'
+  },
+  {
+    id:3, title:'The Ultimate Guide to Making Perfect Pasta from Scratch',
+    category:'Italian', date:'November 20, 2024',
+    img:'https://images.unsplash.com/photo-1556760544-74068565f05c?w=900&q=80',
+    inlineImg:'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=800&q=80',
+    content:`<p>There is a reason that homemade pasta is considered one of the pinnacles of Italian cooking — and indeed of cooking in general. Fresh pasta has a tenderness and richness that dried pasta simply cannot match. Its silky, yielding texture absorbs sauces differently, cooks in a fraction of the time, and carries a delicate eggy flavor that transforms even the simplest of sauces into something sublime.</p>
+    <h3>The Flour Question</h3>
+    <p>The choice of flour is the foundation of great pasta. Traditional Italian pasta uses semolina — coarsely ground durum wheat — for its robust, slightly chewy texture and beautiful golden color. All-purpose flour produces a softer, more delicate pasta that's wonderfully silky. Many of the best pasta recipes use a combination of the two, balancing texture with tenderness.</p>
+    <p>For egg pasta — pasta all'uovo — the ratio of flour to eggs is critical. The classic Italian formula is 100 grams of 00 flour (a very finely milled Italian flour perfect for fresh pasta) per large egg. This produces a dough that is firm enough to work with, rich enough to have excellent flavor, and pliable enough to roll thin without tearing.</p>
+    <p>Egg yolks can be used in place of or in addition to whole eggs for an even richer, more golden pasta. Many celebrated Italian restaurants use a higher ratio of yolks, which produces pasta with an intense golden color, a velvety texture, and extraordinary richness — perfect for delicate filled pastas and tagliatelle.</p>
+    <h3>Making the Dough</h3>
+    <p>Making pasta dough by hand is a meditative, satisfying process that connects you to generations of Italian home cooks. Form a mound of flour on a clean work surface, make a well in the center, crack in your eggs, and begin beating the eggs with a fork, gradually incorporating flour from the inner walls of the well.</p>
+    <p>Once the dough comes together enough to knead, begin working it vigorously with the heel of your hand. Proper kneading develops the gluten network that gives pasta its characteristic chewiness and strength. You'll need to knead for at least 8-10 minutes until the dough is smooth, elastic, and slightly tacky but not sticky. If it tears when stretched, knead longer.</p>
+    <p>After kneading, the dough must rest. Wrap it tightly in plastic wrap and let it sit at room temperature for at least 30 minutes, preferably an hour. Resting allows the gluten to relax, making the dough much easier to roll without springing back.</p>
+    <h3>Rolling and Shaping</h3>
+    <p>You can roll pasta by hand with a long, thin rolling pin — the traditional Italian way — or use a pasta machine. Either way, the goal is to roll the pasta progressively thinner, allowing the dough to relax between passes. If you're using a machine, start on the widest setting, fold the dough in thirds, and run it through again before stepping down the settings incrementally.</p>
+    <p>For most pasta shapes, you'll roll to setting 5 or 6 on a typical 9-setting machine — thin enough to see your hand through the sheet. Filled pastas like ravioli can be rolled slightly thinner, while hearty shapes like pappardelle can be a touch thicker.</p>
+    <p>Cutting the pasta is where you choose your shape. Tagliatelle, fettuccine, pappardelle, maltagliati, quadretti — the world of fresh pasta shapes is wonderfully diverse. Dust your rolled sheets well with semolina flour before cutting to prevent sticking, and cook immediately or allow to dry for 30 minutes before storing.</p>
+    <h3>Cooking and Saucing</h3>
+    <p>Fresh pasta cooks dramatically faster than dried — most shapes are done in 1-3 minutes in generously salted boiling water. You're looking for a texture that is tender but with the slightest firmness at the center. Fresh pasta is already more tender than dried, so don't overcook it.</p>
+    <p>The sauce and pasta should finish cooking together. Transfer your pasta directly from the pot to the pan where your sauce is waiting, bringing along a generous splash of starchy pasta water. Toss vigorously over heat — this emulsification technique creates a sauce that clings perfectly to every strand rather than pooling at the bottom of the bowl.</p>`,
+    takeaways:['Use 00 flour or a blend of 00 and semolina for best results','Rest your dough for at least 30 minutes before rolling','Roll pasta progressively thinner, allowing it to relax between passes','Cook fresh pasta in abundantly salted water for just 1-3 minutes','Always finish pasta in the sauce with reserved pasta water for perfect cohesion'],
+    faqs:[
+      {q:'Do I need a pasta machine to make fresh pasta?',a:'No! A rolling pin and patience work beautifully. A pasta machine does make rolling more consistent and thin, but is not essential.'},
+      {q:'Why is my pasta dough tearing when I roll it?',a:"The gluten hasn't relaxed enough. Rest the dough longer — at least 30 minutes at room temperature — before rolling."},
+      {q:'Can I make pasta dough ahead of time?',a:'Yes. Wrap tightly and refrigerate for up to 24 hours. Bring to room temperature for 30 minutes before rolling.'},
+      {q:'How do I prevent fresh pasta from sticking together?',a:'Dust generously with semolina flour (not all-purpose) and either cook immediately or spread on a lightly floured baking sheet to dry for 30-60 minutes.'},
+      {q:'Can I freeze homemade pasta?',a:'Absolutely. Arrange in portions on a tray, freeze until firm, then transfer to bags. Cook directly from frozen, adding 1-2 minutes to the cooking time.'},
+    ],
+    conclusion:'Making fresh pasta from scratch is one of those kitchen skills that, once learned, changes your cooking forever. It requires no special equipment, relatively few ingredients, and rewards you with something genuinely beautiful and delicious. Start with a simple tagliatelle tossed in butter and parmesan — let the pasta shine — and build from there.'
+  },
+  {
+    id:4, title:'Healthy Meal Prep: A Week of Nutritious Cooking in One Sunday',
+    category:'Healthy', date:'November 15, 2024',
+    img:'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=900&q=80',
+    inlineImg:'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=80',
+    content:`<p>In our increasingly busy lives, the gap between wanting to eat healthily and actually doing so comes down to one thing: preparation. When healthy food is already cooked, portioned, and waiting in your refrigerator, reaching for it becomes the path of least resistance. This is the transformative power of meal prep — and it doesn't have to consume your entire weekend.</p>
+    <h3>The Meal Prep Mindset</h3>
+    <p>Successful meal prep begins not in the kitchen but in your head. The most effective approach isn't about cooking 21 complete meals in advance — that's a recipe for boredom and food fatigue. Instead, think in terms of building blocks: batches of whole grains, roasted proteins, prepared vegetables, and versatile sauces that can be mixed and matched throughout the week to create different meals.</p>
+    <p>This modular approach keeps eating interesting while still delivering the convenience and time-saving benefits of meal prep. On Monday, your grain bowl might feature roasted sweet potato and tahini dressing. By Thursday, the same grains become the base for a stir-fry. The vegetables you roasted on Sunday become a hearty grain bowl or a side for grilled fish — the possibilities multiply exponentially.</p>
+    <p>Before you begin cooking, plan your week. Look at your schedule, note which evenings are busiest, and plan for those nights to have the simplest, most ready-to-eat options. Give yourself permission to have more elaborate cooking on days when you have more time, using your prepped ingredients as a head start.</p>
+    <h3>Setting Up Your Meal Prep Session</h3>
+    <p>A successful meal prep session requires organization. Before you even turn on the oven, gather all your ingredients, wash and dry your vegetables, and make a mental or physical checklist of what you're making. Having everything ready to go before you start — mise en place — makes the actual cooking go much faster and with less stress.</p>
+    <p>Think in parallel processes. While your grains simmer on the stove, your vegetables can roast in the oven. While protein marinates, you can chop the next batch of vegetables. A good meal prep session has you working at maximum efficiency, with multiple things cooking simultaneously without ever feeling chaotic.</p>
+    <p>Invest in good storage containers. Glass containers are ideal because they don't absorb odors, don't stain, and are generally safer for reheating. Have a range of sizes — larger ones for grain and vegetable batches, smaller ones for individual portions and sauces. Label everything with the date and contents to stay organized throughout the week.</p>
+    <h3>The Essential Meal Prep Components</h3>
+    <p>Every great weekly meal prep includes a few key categories. Grains are your foundation — cook a large batch of quinoa, brown rice, farro, or any grain you love. These keep in the refrigerator for up to five days and form the base of countless meals, from bowls to salads to stir-fries.</p>
+    <p>Roasted vegetables are perhaps the most versatile element of meal prep. Chop a selection of whatever looks good and is in season — sweet potatoes, broccoli, cauliflower, zucchini, bell peppers, Brussels sprouts — toss with olive oil, salt, and whatever spices appeal, and roast at high heat until caramelized and tender. Roasted vegetables keep beautifully in the fridge and can be eaten cold, at room temperature, or quickly reheated.</p>
+    <p>A batch-cooked protein — whether that's roast chicken, hard-boiled eggs, baked salmon, or a pot of lentils — gives you a nutritional anchor for your meals throughout the week. Prepare at least two different protein sources for variety. And don't forget sauces: a jar of tahini dressing, a batch of pesto, or a simple vinaigrette can completely transform the same base ingredients into something that feels new and exciting.</p>
+    <h3>Making It Sustainable</h3>
+    <p>The biggest pitfall of meal prep is burnout — starting strong and then abandoning it when it feels tedious. The solution is to keep things simple and rotate your components regularly. Don't prep the same grain and vegetables every week; switch up the grains, change the spices on your roasted vegetables, try different proteins, and experiment with new sauces.</p>
+    <p>Start small if you're new to meal prep. Even preparing just one or two components — say, a batch of grains and a pot of soup — can dramatically reduce decision fatigue and make weeknight cooking feel so much more manageable. As the habit forms, you can gradually expand your prep sessions.</p>`,
+    takeaways:['Think in building blocks: grains, proteins, vegetables, and sauces','Work in parallel to maximize efficiency during prep sessions','Store components separately for maximum freshness and versatility','Keep weekly prep varied to prevent food fatigue','Even partial prep (one or two components) makes a significant difference'],
+    faqs:[
+      {q:'How long do meal prepped foods typically stay fresh?',a:'Cooked grains and roasted vegetables: 4-5 days. Cooked proteins: 3-4 days. Soups and stews: 5-6 days. Sauces and dressings: 5-7 days. Always smell and check before eating.'},
+      {q:'Is it safe to meal prep chicken?',a:'Yes, as long as it reaches an internal temperature of 165°F when cooked and is refrigerated within two hours. Store cooked chicken in airtight containers and use within 3-4 days.'},
+      {q:'Can I freeze meal prepped food?',a:'Most cooked grains, soups, stews, and proteins freeze very well. Raw vegetables generally do not freeze well without blanching first. Label and date everything in the freezer.'},
+      {q:'How do I prevent meal prepped food from getting soggy?',a:'Store dressings and sauces separately from salads and grain bowls. Keep crunchy elements separate and add just before eating. Pat proteins dry before storing.'},
+      {q:'How many hours does a typical meal prep session take?',a:'A comprehensive session covering grains, 2-3 proteins, multiple vegetables, and 2 sauces typically takes 2-3 hours. With practice and parallel cooking, you can reduce this to 90 minutes.'},
+    ],
+    conclusion:'Meal prep is an investment of a few hours that pays dividends throughout your entire week in the form of healthier eating, reduced stress, and significant time savings. Start with the basics, keep it varied and enjoyable, and watch as your relationship with weeknight cooking transforms completely.'
+  },
+  {
+    id:5, title:'Baking Science: Why Your Cakes Rise, Fall, and Everything in Between',
+    category:'Baking', date:'November 10, 2024',
+    img:'https://images.unsplash.com/photo-1549312170-2a8ac29e490b?w=900&q=80',
+    inlineImg:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+    content:`<p>Baking is often described as a science, and this is not an exaggeration. Unlike savory cooking, where instinct and improvisation are celebrated virtues, baking is governed by precise chemical and physical reactions that determine whether your cake rises magnificently or sinks disappointingly. Understanding the science behind these reactions doesn't just help you follow recipes better — it helps you troubleshoot failures, make intelligent substitutions, and develop recipes of your own.</p>
+    <h3>The Chemistry of Leavening</h3>
+    <p>Leavening — the process by which baked goods rise — is the most fundamental aspect of baking science. There are three primary methods of leavening: chemical leavening using baking soda or baking powder, biological leavening using yeast, and mechanical leavening through the incorporation of air by creaming fat and sugar, beating eggs, or folding in whipped whites.</p>
+    <p>Baking soda is sodium bicarbonate, a base that reacts with acids to produce carbon dioxide gas. In a recipe, these acids come from ingredients like buttermilk, yogurt, brown sugar, honey, cocoa powder, or citrus juice. The reaction happens immediately when liquid is added, which is why batters that use baking soda need to go into the oven promptly — you don't want to lose all that precious leavening power before the heat can set the structure.</p>
+    <p>Baking powder contains both an acid and a base in precisely balanced proportions, along with a starch to absorb moisture and prevent premature reaction. Most modern baking powder is double-acting, meaning it releases carbon dioxide twice: first when it contacts liquid, and again when exposed to heat. This gives you a more forgiving window between mixing and baking.</p>
+    <h3>The Role of Gluten in Baking</h3>
+    <p>Gluten is the protein network that forms when flour is hydrated and mixed. It's what gives bread its chewy structure, but it's also the enemy of tender cakes and delicate pastries. Understanding how to develop exactly the right amount of gluten for each type of baked good is central to becoming a skilled baker.</p>
+    <p>In bread making, vigorous kneading develops strong gluten networks that give the bread its characteristic chewy, elastic crumb and allow it to trap the gas produced by yeast, rising beautifully. In cake making, you want the exact opposite: minimal gluten development for a tender, delicate crumb. This is why cake recipes instruct you to mix just until combined and specifically caution against overmixing.</p>
+    <p>Different flours have different protein contents, which determines how much gluten can form. Cake flour has a very low protein content (7-9%) and produces the most tender results. All-purpose flour falls in the middle (10-12%) and works for most baking applications. Bread flour has the highest protein content (12-14%) and is ideal for yeasted breads that need a strong structure.</p>
+    <h3>Fat's Many Roles</h3>
+    <p>Fat is arguably the most versatile ingredient in baking, serving multiple functions simultaneously. It lubricates gluten strands, preventing them from bonding too extensively and thus contributing to tenderness. It traps moisture, extending the shelf life of baked goods by slowing the staling process. And when properly creamed with sugar, butter creates thousands of tiny air pockets that expand during baking, contributing to lift and lightness.</p>
+    <p>The type of fat you use matters enormously. Butter, with its 80% fat content and the remaining 20% composed of water and milk solids, contributes both flavor and leavening. The water in butter converts to steam during baking, providing additional lift. Oil-based cakes, on the other hand, have a different texture — typically more moist and tender because oil coats gluten strands more effectively than solid fat — but lack the structural element that creamed butter provides.</p>
+    <p>Cold butter behaves very differently from room-temperature butter in baking. Room-temperature butter can be properly creamed to incorporate air. Cold butter can be cut into flour to create the flaky, layered textures of pie crust and biscuits. Melted butter creates a dense, fudgy texture, as in brownies. Knowing which state your recipe requires — and why — helps you execute it correctly every time.</p>
+    <h3>Eggs: Structure, Richness, and Emulsification</h3>
+    <p>Eggs perform multiple critical functions in baking simultaneously. The proteins in egg whites coagulate during baking, helping to set the structure of cakes, custards, and soufflés. Egg yolks are rich in lecithin, a natural emulsifier that helps bind water and fat into a smooth, cohesive batter. The fat in egg yolks contributes richness and tenderness. And beaten eggs can incorporate significant amounts of air through mechanical leavening.</p>
+    <p>Temperature matters with eggs too. Room-temperature eggs emulsify more readily into batters than cold eggs, which can cause batters to break or look curdled. If you forget to take your eggs out of the refrigerator ahead of time, place them in warm water for five minutes to quickly bring them to room temperature.</p>`,
+    takeaways:['Baking soda needs an acid to activate; use it immediately after mixing','Overmixing cake batter develops too much gluten, resulting in a tough crumb','Room-temperature ingredients incorporate more easily and produce better results','Understand the role of each ingredient before making substitutions','Oven temperature accuracy is critical — invest in an oven thermometer'],
+    faqs:[
+      {q:'Why did my cake sink in the middle?',a:'Common causes include underbaking, too much leavening, opening the oven door too early, or over-creaming the fat and sugar. Check that your oven temperature is accurate.'},
+      {q:'Can I substitute baking soda for baking powder?',a:'They are not directly interchangeable. Baking soda is about 3-4x stronger and requires an acid in the recipe to activate. If substituting, use 1/4 tsp baking soda for every 1 tsp baking powder and add an acid.'},
+      {q:'Why do some recipes call for both baking soda and baking powder?',a:'The combination provides optimal leavening and flavor. Baking soda neutralizes excess acid and provides color (browning). Baking powder adds additional lift without affecting flavor significantly.'},
+      {q:'What happens if I use cold butter instead of room-temperature butter?',a:'Cold butter cannot be properly creamed to incorporate air, resulting in a denser cake. It also causes batters to look curdled. Always use room-temperature butter unless the recipe specifically calls for cold butter.'},
+      {q:'How do I know when a cake is done baking?',a:'Insert a toothpick in the center — it should come out clean or with just a few moist crumbs. The edges should pull away slightly from the pan, and the top should spring back when lightly pressed.'},
+    ],
+    conclusion:"Understanding the science of baking doesn't diminish its magic — it enhances it. When you know why each ingredient and technique matters, you bake with greater confidence and creativity. You can troubleshoot problems, adapt recipes intelligently, and most importantly, consistently produce baked goods that make everyone around you incredibly happy."
+  },
+  {
+    id:6, title:'Knife Skills Every Home Cook Needs to Master',
+    category:'Techniques', date:'November 5, 2024',
+    img:'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=900&q=80',
+    inlineImg:'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800&q=80',
+    content:`<p>Of all the skills a cook can develop, knife skills are the most foundational. They affect not just speed and efficiency but the actual quality of your finished dishes. Evenly cut vegetables cook at the same rate, ensuring consistent texture throughout a dish. Properly diced onions release their flavor differently than roughly chopped ones. Thinly sliced meat cooks more quickly and remains tender. The investment in learning proper knife technique pays off in every single meal you cook.</p>
+    <h3>Choosing and Caring for Your Knife</h3>
+    <p>The first step toward great knife skills is having a good knife — and one good knife is far better than a drawer full of mediocre ones. For most home cooks, a quality 8-inch chef's knife will handle 90% of all cutting tasks. Look for a knife that feels balanced in your hand, with a handle that your grip falls naturally around and a blade that isn't too heavy or too light.</p>
+    <p>A sharp knife is dramatically safer than a dull one. This surprises many people, but it makes perfect sense when you think about it: a dull blade requires more force, which means less control, which means the knife is more likely to slip unpredictably. A sharp knife requires far less pressure and cuts with precision. Develop a habit of honing your knife with a honing steel before each use, and have it professionally sharpened a few times a year.</p>
+    <h3>The Foundation: Proper Grip</h3>
+    <p>Most people hold a knife incorrectly, gripping the handle with all four fingers wrapped around it — what cooks call a "hammer grip." The proper technique is the pinch grip, where your thumb and the side of your index finger pinch the base of the blade itself, above the handle. Your other three fingers wrap around the handle. This gives you far more control and significantly reduces hand fatigue during extended cutting sessions.</p>
+    <p>The other hand — the one holding the food — uses the "claw grip." Curl your fingertips under so that your knuckles face forward, and let the flat side of the blade rest against your knuckles as you cut. Your knuckles act as a guide, keeping the blade from ever reaching your fingertips. This technique feels awkward at first but quickly becomes second nature and is essential for safe, efficient cutting.</p>
+    <h3>Essential Cutting Techniques</h3>
+    <p>The dice is the workhorse of culinary cutting. A proper dice begins with cutting your ingredient into uniform planks, then cutting those planks into uniform sticks (batonnet), and finally cutting those sticks crosswise into cubes. The size of the dice is determined by the width of your cuts: small dice (1/4 inch), medium dice (1/2 inch), large dice (3/4 inch). Uniformity is everything — it ensures even cooking and a professional appearance.</p>
+    <p>The julienne cut produces thin matchstick strips, typically 1/8 inch by 2 inches, used for stir-fries, slaws, and garnishes. The chiffonade is a rolling cut used for leafy herbs and greens — stack the leaves, roll them tightly into a cigar shape, and slice crosswise into thin ribbons. Both techniques emphasize thin, precise, uniform cuts.</p>
+    <p>The rocking chop is used for herbs and garlic, where you place the tip of the knife on the board and rock the blade up and down, moving it across the ingredient in a fan motion. This is not for precision cutting but for finely mincing. Keep one hand lightly on the spine of the blade to guide the motion and keep the tip anchored on the board.</p>`,
+    takeaways:['Invest in one excellent chef\'s knife rather than many mediocre ones','Keep your knife sharp — a dull knife is more dangerous than a sharp one','Master the pinch grip for control and the claw grip for safety','Uniform cuts ensure even cooking — precision matters','Practice on affordable vegetables like onions and carrots to build speed'],
+    faqs:[
+      {q:'How often should I sharpen my knife?',a:'Hone with a steel before each use. Have the knife professionally sharpened or use a whetstone 2-4 times per year depending on how frequently you cook.'},
+      {q:'What is the difference between honing and sharpening?',a:'Honing realigns the edge of the blade without removing metal. Sharpening removes metal to create a new edge. Both are necessary for maintaining a sharp knife.'},
+      {q:'What cutting board material is best?',a:'Wood and plastic are both excellent choices. Wood is gentler on knife edges and naturally antimicrobial. Avoid glass and ceramic boards, which will quickly dull even the sharpest knives.'},
+      {q:'How do I cut an onion without crying?',a:'Use a sharp knife (dull knives crush cells, releasing more irritants), chill the onion for 30 minutes before cutting, and keep the root end intact until the very last cut.'},
+      {q:'Is a chef\'s knife or a santoku better for beginners?',a:"Both are excellent all-purpose knives. A chef's knife with its curved blade and rock-chopping motion suits many Western cooking styles. A santoku with its straighter edge is ideal for push-cutting. Try both if possible."},
+    ],
+    conclusion:"Great knife skills are learned through deliberate practice, not just repetition. Slow down, focus on grip and technique, and work with intention. The speed will come naturally over time. Once you feel confident with your knife, cooking becomes faster, safer, and genuinely more enjoyable — you'll wonder how you ever managed without these skills."
+  },
+  {
+    id:7, title:'A Deep Dive into Fermented Foods and Their Health Benefits',
+    category:'Health & Wellness', date:'October 30, 2024',
+    img:'https://images.unsplash.com/photo-1597249099015-5aba59a4cfb0?w=900&q=80',
+    inlineImg:'https://images.unsplash.com/photo-1589135716572-9b72f5c36a3c?w=800&q=80',
+    content:`<p>Fermentation is one of humanity's oldest food preservation technologies, dating back thousands of years across virtually every culture on earth. From the tangy kimchi of Korea to the funky aged cheeses of Europe, from the probiotic-rich yogurts of the Middle East to the sour, bubbly sourdough of artisan bakeries, fermented foods have sustained and nourished human populations for millennia.</p>
+    <h3>What is Fermentation?</h3>
+    <p>Fermentation is a metabolic process in which microorganisms — bacteria, yeasts, or molds — convert sugars into other substances, typically acids, gases, or alcohol, in the absence of oxygen. In food fermentation, this process is harnessed deliberately to transform raw ingredients into products with enhanced preservation, improved nutrition, and complex, developed flavors.</p>
+    <p>The two most common types of food fermentation are lactic acid fermentation, which produces the characteristic sour flavor in products like yogurt, sauerkraut, kimchi, and sourdough; and alcoholic fermentation, where yeasts convert sugars to ethanol and carbon dioxide, producing wine, beer, and bread leavening. Other types include acetic acid fermentation (vinegar), mold fermentation (tempeh, miso, some cheeses), and mixed fermentations.</p>
+    <h3>The Science of Gut Health</h3>
+    <p>The human gut is home to trillions of microorganisms — bacteria, viruses, fungi, and archaea — collectively known as the gut microbiome. This complex ecosystem plays roles in digestion, immune function, metabolism, and even mental health that researchers are only beginning to fully understand. The composition of your microbiome, influenced heavily by diet, has been linked to everything from inflammation and autoimmune disease to mood and cognitive function.</p>
+    <p>Fermented foods containing live cultures — often called probiotics — can contribute beneficial microorganisms to the gut. When you eat yogurt with live cultures, drink kefir, or consume lacto-fermented vegetables, you're introducing microorganisms that may temporarily inhabit the gut and confer benefits. Research suggests that regularly consuming a diverse range of fermented foods can increase gut microbiome diversity, which is generally associated with better health outcomes.</p>
+    <p>The prebiotic fiber found in many fermented vegetables also plays an important role. While probiotics introduce beneficial bacteria, prebiotics provide the food that these bacteria — and the existing beneficial microorganisms in your gut — need to thrive. This combination of probiotic and prebiotic effects makes fermented foods particularly powerful for gut health support.</p>
+    <h3>Nutritional Advantages of Fermented Foods</h3>
+    <p>Beyond their probiotic content, fermented foods offer several nutritional advantages over their unfermented counterparts. During fermentation, bacteria produce enzymes that pre-digest certain nutrients, making them more bioavailable — meaning your body can absorb and utilize them more effectively. Fermented dairy products like yogurt and kefir, for example, are much better tolerated by people with lactose sensitivity because the fermentation process breaks down much of the lactose.</p>
+    <p>Fermentation also reduces or eliminates certain anti-nutrients found in whole grains and legumes, such as phytic acid, which binds to minerals like iron, zinc, and calcium and inhibits their absorption. Sourdough fermentation, in particular, significantly reduces phytic acid content in bread, making the mineral content of sourdough considerably more bioavailable than that of conventionally yeasted bread.</p>
+    <p>Many fermented foods are also rich in vitamins produced as byproducts of bacterial metabolism. Fermented vegetables can be good sources of vitamin K2, which is rare in Western diets and plays important roles in bone and cardiovascular health. Some fermented foods also provide B vitamins, including B12, which is particularly notable for plant-based eaters.</p>`,
+    takeaways:['Fermented foods can contribute beneficial microorganisms to the gut','Diversity of fermented foods consumed is as important as quantity','Start with gentler ferments like yogurt and kefir before tackling kimchi or kvass','Fermentation improves nutrient bioavailability in many foods','Not all fermented products contain live cultures — look for "contains live cultures" on labels'],
+    faqs:[
+      {q:'Do I need to eat fermented foods every day to get benefits?',a:'Consistency matters more than quantity. Even small, regular amounts of diverse fermented foods are more beneficial than occasional large servings. Aim for at least one serving of a fermented food daily.'},
+      {q:'Can I make fermented foods at home safely?',a:'Yes, lacto-fermentation (vegetables, yogurt) is very safe to do at home with proper technique. The acidity created during fermentation protects against harmful pathogens. Follow tested recipes and maintain cleanliness.'},
+      {q:'Are all probiotic supplements equivalent to eating fermented foods?',a:'No. Whole fermented foods contain a complex matrix of nutrients, fiber, and diverse microorganisms that supplements cannot replicate. Supplements have their place but should not replace whole foods.'},
+      {q:'I have a sensitive stomach — how should I introduce fermented foods?',a:'Start with small amounts — a tablespoon of kimchi or a quarter cup of yogurt — and gradually increase over several weeks. Some people experience temporary bloating when first adding fermented foods.'},
+      {q:'Does cooking kill the probiotics in fermented foods?',a:'Yes, heat destroys live cultures. Foods like sourdough bread and cooked kimchi still offer other nutritional benefits but lose their probiotic content during cooking. Consume some fermented foods in their raw state for probiotic benefits.'},
+    ],
+    conclusion:"Fermented foods represent one of the most exciting frontiers in nutrition science, with research continuing to reveal the profound ways in which our gut microbiome shapes our health. By incorporating a diverse range of fermented foods into your diet — yogurt, kefir, kimchi, sauerkraut, miso, kombucha — you're not just nourishing yourself with their immediate nutritional value, you're cultivating a thriving ecosystem within your own body."
+  },
+  {
+    id:8, title:'The Complete Guide to One-Pot Cooking',
+    category:'Quick Meals', date:'October 25, 2024',
+    img:'https://images.unsplash.com/photo-1547592180-85f173990554?w=900&q=80',
+    inlineImg:'https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?w=800&q=80',
+    content:`<p>One-pot cooking is not just a technique — it's a philosophy. At its heart, it's about simplicity, efficiency, and the understanding that some of the most delicious, deeply flavored food in the world comes from allowing ingredients to cook together slowly, with flavors building and melding over time. From the French cassoulet to the Spanish paella, from Moroccan tagines to Italian ribollita, the world's most beloved dishes are one-pot creations.</p>
+    <h3>Why One-Pot Cooking Works</h3>
+    <p>The genius of one-pot cooking lies in the way flavors build and integrate over the course of cooking. As ingredients cook together, they exchange flavors. The protein releases juices that enrich the broth. The vegetables absorb the flavors of the aromatics and spices. The starch from added grains or legumes thickens the liquid into something with body and richness. By the time you serve the dish, every component has been transformed by its neighbors in the pot.</p>
+    <p>This integration of flavors is why one-pot dishes are almost always better the next day. As the components sit in the cooking liquid overnight in the refrigerator, the exchange of flavors continues slowly. Leftovers from a braise, stew, or soup are almost invariably more flavorful than the first serving, which is wonderful news for meal preppers and batch cookers.</p>
+    <h3>Building a One-Pot Dish from Scratch</h3>
+    <p>Every great one-pot dish follows a basic architecture. It begins with building an aromatic base — sautéing onions, garlic, celery, carrots, or whatever aromatics your recipe calls for, in fat until softened and beginning to caramelize. This step is not optional and should not be rushed. The depth of flavor in your finished dish depends enormously on how well you develop these aromatics at the start.</p>
+    <p>Next comes the addition of any dry spices, which are briefly bloomed in the hot fat with the aromatics. Then comes whatever is providing structure and substance — the protein, beans, or vegetables that will be the heart of the dish. These are often seared or browned before liquid is added, for the Maillard reaction creates a depth of flavor that cannot be achieved any other way.</p>
+    <p>The liquid comes next — stock, broth, wine, coconut milk, or crushed tomatoes — along with any additional vegetables, legumes, or grains. From here, one-pot cooking requires patience: low, gentle, sustained heat that cooks everything through without overcooking any single component. The reward for your patience is a dish where every element has contributed to and absorbed the flavors of everything around it.</p>`,
+    takeaways:['Never skip building the aromatic base — it creates foundational flavor','Brown proteins before adding liquid for maximum depth','One-pot dishes almost always improve with time — make them ahead','Choose a pot that conducts heat evenly and retains it well','Season in layers throughout cooking, not just at the end'],
+    faqs:[
+      {q:'What is the best pot for one-pot cooking?',a:"A Dutch oven — heavy, enamel-coated cast iron — is the gold standard. It distributes heat evenly, retains it beautifully, and transitions seamlessly from stovetop to oven."},
+      {q:'How do I prevent one-pot dishes from becoming too watery?',a:'If your dish is too thin, remove the lid and simmer over medium heat to reduce and concentrate the liquid. You can also add a paste of flour and butter (beurre manié) as a quick thickener.'},
+      {q:'Can pasta and rice be cooked directly in one-pot dishes?',a:'Yes! They absorb the surrounding liquid and flavor as they cook. The starch they release also helps thicken the dish. Add them later in the cooking process so they don\'t overcook.'},
+      {q:'How do I add vegetables so they don\'t get mushy?',a:'Add hardier vegetables (root vegetables, winter squash) early and more delicate ones (peas, leafy greens, zucchini) in the last 5-10 minutes of cooking.'},
+      {q:'Is it safe to cook from frozen in a one-pot dish?',a:'Yes, for most applications. Frozen vegetables can be added directly to simmering dishes. Frozen protein should be thawed first for food safety and even cooking.'},
+    ],
+    conclusion:"One-pot cooking is one of the greatest gifts you can give yourself in the kitchen. It simplifies weeknight dinners, produces deeply satisfying, flavor-packed meals, and leaves you with minimal cleanup. Master a handful of these techniques and you'll have a reliable repertoire of crowd-pleasing dishes that require minimal effort for maximum reward."
+  },
+  {
+    id:9, title:'Understanding Wine and Food Pairing: A Practical Guide',
+    category:'Wine & Food', date:'October 18, 2024',
+    img:'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=900&q=80',
+    inlineImg:'https://images.unsplash.com/photo-1474722883778-792e7990302f?w=800&q=80',
+    content:`<p>Wine and food pairing is one of those subjects that can seem intimidatingly complex — a world of arcane rules, obscure grape varieties, and the terrifying possibility of committing some unforgivable gastronomic faux pas. But the reality is far more approachable and far more fun. At its core, wine and food pairing is about the relationship between two things: what you're eating and what you're drinking. When they work together, the combination is greater than the sum of its parts.</p>
+    <h3>The Basic Principles</h3>
+    <p>Before diving into specific pairings, it helps to understand the principles that make them work. The first is complementary pairing: choosing a wine that shares flavor characteristics with the food. A light, herbaceous Sauvignon Blanc pairs beautifully with fresh herbs, green vegetables, and seafood because they share similar freshness and green, vegetal aromas.</p>
+    <p>The second principle is contrasting pairing: choosing a wine that balances or counterpoints the food's dominant characteristics. A rich, fatty duck confit benefits from the acidity and earthiness of a Pinot Noir, which cuts through the fat and provides contrast rather than amplification. Sweet Riesling pairs magnificently with spicy Asian cuisine because the sweetness cools the heat and the acidity cuts through rich sauces.</p>
+    <p>Regional pairing — the idea that wines from a particular place pair naturally with the foods of that region — is also a reliable guiding principle. The people of Tuscany didn't coincidentally develop a tradition of rich Chianti alongside their pasta and wild boar dishes: these pairings developed organically over centuries because they genuinely work beautifully together.</p>
+    <h3>Understanding Wine Components</h3>
+    <p>To pair intelligently, you need to understand the components of wine and how they interact with food. Acidity in wine works like a squeeze of lemon — it brightens, cuts through fat, and provides freshness. High-acid wines like Sauvignon Blanc, Champagne, and Pinot Grigio are wonderfully versatile with food because they can cut through richness without overwhelming.</p>
+    <p>Tannins are polyphenols found primarily in red wine that create that drying, astringent sensation in the mouth. Tannins interact dramatically with protein — they bind to it and soften, which is why tannic Cabernet Sauvignon becomes beautifully supple when paired with a ribeye steak. Without the protein to bind to, those same tannins can taste harsh and bitter, which is why tannic reds often clash with fish or light chicken dishes.</p>
+    <p>Sweetness in wine works similarly to sugar in cooking — it balances heat, bitterness, and acidity. A slightly sweet Riesling tames the fire of spicy Thai food. A sweet Sauternes creates a transcendent contrast with the salty richness of foie gras. And never underestimate the power of bubbles: the effervescence of sparkling wine can cut through fat, cleanse the palate, and elevate even the most indulgent foods.</p>`,
+    takeaways:['Match the weight of the wine to the weight of the dish','High-acid wines are the most food-friendly and versatile','Tannins need protein to soften — pair tannic reds with rich, fatty proteins','Sweet wines pair beautifully with spicy food and salty cheeses','When in doubt, match regional wine with regional cuisine'],
+    faqs:[
+      {q:'Do I have to follow pairing rules strictly?',a:'Absolutely not. These are guidelines, not laws. If you love Chardonnay with steak, drink it. The best pairing is one that you enjoy.'},
+      {q:'What wine pairs with pizza?',a:'Pizza is wonderfully versatile. Italian wines like Chianti, Montepulciano, or a simple Barbera are classic choices. For white pizza, try a crisp Pinot Grigio.'},
+      {q:'Can you pair red wine with fish?',a:'Yes! Light, low-tannin reds like Pinot Noir pair beautifully with salmon and tuna. Avoid high-tannin reds with most seafood, as they clash unpleasantly.'},
+      {q:'What is the best wine to serve if I have a diverse menu?',a:'Sparkling wine or Champagne is the universal answer. Its acidity and bubbles work with almost everything, from appetizers to main courses.'},
+      {q:'Should wine be served at room temperature?',a:"'Room temperature' refers to a cellar temperature of around 60-65°F (15-18°C), not modern room temperature which is often too warm. White and sparkling wines should be chilled; reds served slightly cool."},
+    ],
+    conclusion:"Wine pairing, at its best, is about curiosity and pleasure — not rules and anxiety. Start with the basic principles, experiment with pairings that interest you, and trust your palate. The more you pay attention to how wine and food interact, the more intuitive and enjoyable the process becomes. Raise a glass to discovery."
+  },
+  {
+    id:10, title:'The Magic of Umami: Cooking with the Fifth Taste',
+    category:'Flavor Science', date:'October 10, 2024',
+    img:'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=900&q=80',
+    inlineImg:'https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=800&q=80',
+    content:`<p>For most of culinary history, food scientists and chefs recognized four basic tastes: sweet, sour, salty, and bitter. Then, in 1908, Japanese chemist Kikunae Ikeda isolated a fifth taste from kombu seaweed broth — a savory, deeply satisfying, mouth-coating sensation he called umami, from the Japanese words for "pleasant" and "taste." Today, umami is recognized as a fundamental taste sensation, and understanding it is a key to unlocking depth and satisfaction in your cooking.</p>
+    <h3>What is Umami, Exactly?</h3>
+    <p>Umami is the taste of glutamates and nucleotides — naturally occurring compounds found in a wide range of foods. Glutamate, specifically monosodium glutamate (MSG) in its natural form, is an amino acid that occurs abundantly in protein-rich and aged or fermented foods. Nucleotides like inosinate (found in meat and fish) and guanylate (found in dried mushrooms) synergize dramatically with glutamates, multiplying the perceived umami intensity several times over.</p>
+    <p>The sensation of umami is difficult to describe but unmistakable: a savory, brothy, long-lasting mouthwatering quality that lingers on the palate and makes you want to take another bite. It's the satisfying depth in a bowl of ramen, the richness in a slow-cooked tomato sauce, the complexity in aged parmesan, the satisfaction in a good steak.</p>
+    <h3>Umami-Rich Ingredients</h3>
+    <p>Understanding which foods are naturally rich in umami is the first step toward cooking with greater intentionality. Parmesan cheese is one of the most umami-dense foods in the world, with a glutamate content that rivals even anchovies and soy sauce. This is why a shower of parmesan over pasta transforms a simple dish into something deeply satisfying, and why parmesan rinds simmered in soups and sauces add such remarkable depth.</p>
+    <p>Tomatoes — particularly cooked, concentrated, or sun-dried — are extraordinary umami bombs. Cooking concentrates their natural glutamates, which is why a slowly cooked tomato sauce develops so much more depth and savory richness than fresh tomatoes. Tomato paste, essentially concentrated cooked tomatoes, is one of the most powerful and affordable umami boosters available.</p>
+    <p>Soy sauce, fish sauce, and miso paste are umami powerhouses. Used judiciously, they don't necessarily make dishes taste Asian — they make them taste more intensely of themselves. A teaspoon of fish sauce in a beef stew or a tablespoon of white miso in a salad dressing adds a depth and complexity that is unmistakably wonderful even if you can't identify its source.</p>
+    <p>Dried and aged foods concentrate umami dramatically. Dried mushrooms — particularly shiitake, porcini, and morels — are extraordinary umami sources, with the added benefit that the soaking water they rehydrate in is rich with their extracted glutamates and nucleotides and should be used as stock. Aged cheeses, cured meats, and fermented products of all kinds benefit from the same principle: time and enzymatic activity concentrate and develop umami compounds.</p>`,
+    takeaways:['Combining glutamate-rich and nucleotide-rich foods multiplies umami synergistically','Cooking and concentrating tomatoes dramatically increases their umami content','Parmesan rinds are an underused umami superstar — save and use them in stocks','Fish sauce and soy sauce add umami depth without necessarily adding Asian flavor','Dried and fermented foods are almost always umami-rich'],
+    faqs:[
+      {q:'Is MSG safe to eat?',a:'Yes. Despite persistent misconceptions, MSG has been thoroughly studied and is recognized as safe by health organizations worldwide including the FDA. It occurs naturally in many foods we eat daily.'},
+      {q:'How is umami different from saltiness?',a:'Umami and saltiness are distinct tastes. Umami provides a savory, brothy, coating sensation that lingers on the palate, while saltiness is a sharp, immediate taste. Salt often enhances umami perception but they are not the same.'},
+      {q:'What are the most budget-friendly umami boosters?',a:'Tomato paste, soy sauce, fish sauce, nutritional yeast, and anchovy paste are all affordable umami powerhouses. Parmesan rinds, which are often discarded, are also an excellent free umami source.'},
+      {q:'Can vegetarians get umami in their cooking?',a:'Absolutely. Parmesan (for vegetarians), miso, soy sauce, dried mushrooms, tomato paste, nutritional yeast, and kombu are all excellent plant-based umami sources.'},
+      {q:"Why does adding a small amount of umami-rich ingredient make my dish taste 'more like itself'?",a:"Umami has a flavor-enhancing effect that heightens the overall perception of savory flavors in a dish, making it taste more fully realized and deeply satisfying without you being able to pinpoint a specific new flavor."},
+    ],
+    conclusion:"Understanding umami gives you a new lens through which to evaluate and improve every savory dish you cook. Once you start thinking about glutamate stacking — combining multiple umami-rich ingredients to create exponentially more satisfying flavors — you'll find that your dishes develop a depth and completeness that delights everyone at your table."
+  },
+  {
+    id:11, title:'Farm to Table: A Guide to Shopping and Eating Seasonally',
+    category:'Sustainable Eating', date:'October 2, 2024',
+    img:'https://images.unsplash.com/photo-1506368249639-73a05d6f6488?w=900&q=80',
+    inlineImg:'https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=800&q=80',
+    content:`<p>There's a reason that a sun-ripened summer tomato tastes incomparably better than a January tomato from a distant greenhouse: seasonal produce is harvested at peak ripeness, when its natural sugars, acids, and aromatic compounds have developed fully. Eating seasonally isn't just a romantic notion or a trendy food philosophy — it's the most direct path to the most flavorful, nutritious food available, and it happens to be better for the planet too.</p>
+    <h3>Why Seasonal Eating Matters</h3>
+    <p>Produce that travels thousands of miles from a distant growing region to your supermarket must be harvested before it's fully ripe so that it can survive the journey. This interruption of the natural ripening process means that much of the flavor and nutritional development that happens in the final days before a fruit or vegetable reaches peak ripeness never occurs. The result is produce that looks perfectly fine but tastes of almost nothing.</p>
+    <p>Seasonal, local produce has none of these compromises. Harvested at peak ripeness and traveling perhaps just a few miles from farm to market, it has had time to develop its full complement of flavors and nutrients. The difference is not subtle — a farmers' market strawberry in June and a supermarket strawberry in December are barely recognizable as the same fruit.</p>
+    <p>Beyond flavor and nutrition, choosing seasonal, local produce supports your local food economy, reduces the environmental cost of long-distance food transportation, and connects you to the natural rhythms of your region's agricultural calendar — a connection that, once established, profoundly changes your relationship with food.</p>
+    <h3>Learning Your Seasonal Calendar</h3>
+    <p>The seasonal calendar varies considerably by region, so learning what's in season where you live is more valuable than following a generic national chart. The best way to learn is simply to visit your local farmers' market regularly and pay attention to what the farmers are selling. What's abundant and cheap? What are they most excited about? These are the things in peak season, and these are the things you should be cooking.</p>
+    <p>In spring, you can expect asparagus, peas, fava beans, spring onions, young lettuces, and the first strawberries. Summer brings tomatoes, corn, peppers, eggplant, zucchini, cucumbers, stone fruits like peaches and cherries, and berries in abundance. Autumn offers winter squash, apples, pears, root vegetables, and brassicas like broccoli, cauliflower, and Brussels sprouts. Winter, even in colder climates, provides hearty greens, citrus, stored root vegetables, and alliums like onions and garlic.</p>`,
+    takeaways:['Seasonal produce is harvested at peak ripeness and is dramatically more flavorful','Visit farmers\' markets regularly to learn what\'s actually in season near you','Buy in abundance when something is at peak — preserve the excess for winter','Build your menu around what\'s available, not the other way around','Even small shifts toward seasonal eating make a meaningful difference'],
+    faqs:[
+      {q:'Is organic produce always better than conventional seasonal produce?',a:'Not necessarily. Local, seasonal conventional produce is often fresher and more nutritious than organic produce that has traveled long distances. Both organic certification and freshness matter.'},
+      {q:'How do I eat seasonally in winter when produce options seem limited?',a:"Winter has more to offer than you might think: citrus fruits, root vegetables, winter squash, hearty greens, and stored apples and pears. It's also the perfect time for preserved and fermented vegetables."},
+      {q:'What should I do with an abundance of seasonal produce?',a:'Preserve it! Freeze berries and blanched vegetables, make jams, pickle cucumbers and peppers, ferment cabbage into sauerkraut, dry herbs and mushrooms. These preservation skills are invaluable.'},
+      {q:'Is seasonal eating more expensive than buying whatever I want year-round?',a:'Seasonal produce is often actually cheaper — abundance drives prices down. You may spend more on specialty items out of season, but peak-season staples are frequently less expensive than their off-season counterparts.'},
+      {q:'How do I find local farms and farmers\' markets?',a:'Search online for farmers\' markets and CSA (Community Supported Agriculture) programs in your area. Many farms also offer direct purchasing through farm stands or subscription boxes.'},
+    ],
+    conclusion:"Seasonal eating is one of the most transformative choices you can make as a cook and as a consumer. It reconnects you with the rhythms of the natural world, rewards you with the most flavorful and nutritious ingredients available, and builds a relationship with your local food community that enriches not just your cooking but your entire relationship with food."
+  },
+  {
+    id:12, title:'Breakfast Around the World: Global Morning Traditions',
+    category:'World Cuisine', date:'September 25, 2024',
+    img:'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=900&q=80',
+    inlineImg:'https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=800&q=80',
+    content:`<p>Breakfast is the meal most closely tied to culture, habit, and identity. While many of us grow up thinking of breakfast in terms of our own national tradition — whether that's eggs and bacon, congee, or flatbread with tea — the reality is that morning meals around the world are as diverse and interesting as the cultures that produce them. Exploring global breakfast traditions is a delicious way to expand your culinary horizons without ever leaving your kitchen.</p>
+    <h3>The Full English Breakfast</h3>
+    <p>Few breakfasts are as legendary — or as debated — as the Full English Breakfast. A proper fry-up includes back bacon (not the thin streaky bacon common in North America, but thick-cut back bacon), fried or scrambled eggs, grilled tomatoes, sautéed mushrooms, baked beans, and toast or fried bread. Black pudding (blood sausage) and fried bread are optional additions that divide opinion strongly.</p>
+    <p>The Full English evolved from the Victorian-era tradition of substantial morning meals consumed by landed gentry with the energy demands of a full day of country pursuits. Today it persists as a beloved weekend indulgence and a morning meal that genuinely sustains through the longest of mornings. Each component matters and should be prepared with care: the bacon should be crisp at the edges but still yielding, the eggs cooked to personal preference, the tomatoes properly charred and seasoned.</p>
+    <h3>Japanese Ichiju Sansai</h3>
+    <p>The traditional Japanese breakfast, based on the ichiju sansai philosophy (one soup, three sides), is perhaps the most nutritionally balanced morning meal in the world. A typical breakfast might include a bowl of steamed rice, a bowl of miso soup with tofu and wakame seaweed, a piece of grilled fish (often salmon or mackerel), pickled vegetables, and a small side of rolled omelette (tamagoyaki).</p>
+    <p>What makes Japanese breakfast so remarkable is its restraint and balance. Each component is prepared simply, with an emphasis on fresh, quality ingredients and techniques that highlight rather than mask their natural flavors. Nutritionally, it delivers protein from fish and tofu, probiotics from miso and pickles, complex carbohydrates from rice, and a wide range of micronutrients from the vegetables and seaweed.</p>
+    <h3>South Asian Breakfast Traditions</h3>
+    <p>South Asian breakfast traditions are extraordinarily diverse, varying dramatically from region to region. In Pakistan and northern India, a common breakfast might include paratha (layered, pan-fried flatbread) served with yogurt, pickles, and chai; or nihari, a deeply spiced slow-cooked meat stew traditionally consumed as a morning meal. In the Punjab region, saag with makki di roti (mustard greens with cornmeal flatbread) is a beloved winter breakfast.</p>
+    <p>South Indian breakfast is quite different, centered around fermented rice and lentil preparations like idli (steamed rice cakes), dosa (crispy fermented crepes), and uttapam (thick savory pancakes), all typically served with coconut chutney and sambar. The fermentation in these preparations not only develops complex flavors but also enhances the nutritional value and digestibility of the ingredients.</p>`,
+    takeaways:['Global breakfast traditions reflect cultural values, climate, and available ingredients','Fermented breakfast foods (miso soup, South Indian idli) support gut health','Savory breakfasts from around the world offer nutritional advantages over sweet ones','Learning global breakfast traditions expands your weekday morning repertoire significantly','Many traditional breakfasts prioritize protein and complex carbohydrates for sustained energy'],
+    faqs:[
+      {q:'What is the healthiest traditional breakfast from around the world?',a:'The traditional Japanese ichiju sansai breakfast is widely considered one of the most nutritionally balanced, featuring diverse protein sources, fermented foods, vegetables, and complex carbohydrates.'},
+      {q:'How can I incorporate global breakfast ideas without spending hours cooking in the morning?',a:'Prepare components ahead: make miso paste or instant miso sachets for Japanese breakfast; batch-cook paratha dough; or make overnight oats inspired by Nordic traditions. Many global breakfasts are simpler than they appear.'},
+      {q:'Why is breakfast considered the most important meal in some cultures but skipped in others?',a:'Cultural attitudes toward breakfast vary with historical food availability, climate, work patterns, and religious traditions. Mediterranean cultures often have light breakfasts and larger midday meals, while northern European and American traditions favor substantial morning meals.'},
+      {q:'What makes South Asian chai different from Western tea?',a:'Traditional chai is brewed with spices (cardamom, ginger, cinnamon, cloves), cooked with milk directly in the pot rather than added separately, and often sweetened significantly. The result is a rich, spiced beverage quite different from the milder Western cup of tea.'},
+      {q:'Is it culturally appropriate to cook and serve traditional dishes from other cultures?',a:'Cooking global foods at home is wonderful and encouraged as a form of culinary exploration. Approach it with respect, learn about the cultural context, and seek authentic recipes from people of those cultures when possible.'},
+    ],
+    conclusion:"Exploring global breakfast traditions is one of the most accessible ways to expand your culinary world. Each culture's morning meal carries within it centuries of history, agricultural tradition, and collective wisdom about how to start a day well. Whether you're inspired to try a traditional Japanese breakfast this weekend or attempt your own paratha, the world's breakfast table has something extraordinary to offer."
+  },
+  {
+    id:13, title:'The Art of Sauce Making: Foundation Sauces Every Cook Should Know',
+    category:'Techniques', date:'September 18, 2024',
+    img:'https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=900&q=80',
+    inlineImg:'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80',
+    content:`<p>Auguste Escoffier, the legendary French chef who codified classical French cuisine, understood that mastering a cuisine begins with mastering its sauces. He organized French sauces into five "mother sauces" — béchamel, velouté, espagnole, sauce tomat, and hollandaise — from which hundreds of derivative sauces could be created through the addition of various ingredients. This architecture of sauce-making reveals something profound: great sauces are not mysterious or inaccessible, they are systematic.</p>
+    <h3>The Mother Sauces</h3>
+    <p>Béchamel is the simplest of the mother sauces: a white sauce made by cooking a butter-flour roux and whisking in hot milk until smooth and thick. From this simple foundation spring countless derivatives: mornay sauce (add Gruyère and parmesan for the classic cheese sauce of croque monsieur and macaroni and cheese), sauce Soubise (add puréed onion), and cream sauce. Béchamel is the foundation of lasagna, moussaka, and countless gratins.</p>
+    <p>Velouté is a sister to béchamel but uses white stock — chicken, veal, or fish — instead of milk. The resulting sauce has a lighter, more complex, more savory character than béchamel. From velouté come supreme sauce (add cream and butter), allemande (add lemon and egg yolk), and the many derivative sauces that accompany poached chicken, fish, and vegetable dishes in classical French cooking.</p>
+    <p>Hollandaise is technically an emulsion sauce rather than a roux-based sauce. Made by whisking egg yolks with clarified butter and lemon juice over gentle heat, hollandaise achieves its smooth, velvety consistency through careful emulsification. It's one of the more technically challenging mother sauces, requiring close attention to temperature and constant whisking, but the reward — a rich, tangy, luxuriously silky sauce — is extraordinary.</p>
+    <h3>Building Modern Sauces</h3>
+    <p>Beyond the classical French framework, there is an equally important category of pan sauces — quick sauces built directly in the pan after searing protein. The technique is simple but produces remarkably complex results: after removing your cooked protein, you deglaze the pan with wine, stock, or other liquid, scraping up all the caramelized fond (the brown bits stuck to the pan) which is concentrated, pure flavor. You then reduce this liquid, finish it with butter, acid, and herbs, and you have a restaurant-quality sauce in under five minutes.</p>
+    <p>Emulsion sauces — vinaigrettes, mayonnaise, aioli — are another essential category. Understanding emulsification (the process of combining two liquids that don't naturally mix, like oil and water, into a stable suspension) opens up an entire world of sauces, dressings, and spreads. A good emulsion sauce clings to food beautifully, delivering flavor in every bite.</p>`,
+    takeaways:['The five mother sauces are the foundation of countless derivative sauces','Pan sauces built from fond are quick, flavorful, and require minimal technique','Emulsification is a key skill that unlocks vinaigrettes, mayonnaise, and butter sauces','Season sauces at every stage of cooking, not just at the end','A well-made sauce can elevate even the simplest protein into something remarkable'],
+    faqs:[
+      {q:'What is the most important sauce for a home cook to learn first?',a:'A simple pan sauce is the most immediately useful. Master the technique of deglazing and reducing, and you have a restaurant-quality sauce ready in minutes after cooking any protein.'},
+      {q:'Why does my béchamel always end up lumpy?',a:'Lumps usually form when cold milk is added too quickly to hot roux, or when the roux is not cooked long enough. Always heat your milk separately and add it gradually while whisking constantly.'},
+      {q:'How do I fix a broken hollandaise?',a:'If your hollandaise separates, start with a fresh egg yolk in a clean bowl and slowly whisk in the broken sauce, treating it as you would fresh butter. This usually successfully re-emulsifies it.'},
+      {q:'Can sauces be made ahead and reheated?',a:'Most roux-based sauces reheat beautifully over gentle heat with a splash of milk or stock. Emulsion sauces like hollandaise and béarnaise are best made fresh as they are prone to breaking when reheated.'},
+      {q:'What is the difference between a sauce and a gravy?',a:"Technically, 'gravy' refers to a sauce made from the pan drippings of roasted or pan-cooked meat, thickened with flour or cornstarch. All gravies are sauces, but not all sauces are gravies."},
+    ],
+    conclusion:"Learning to make great sauces is like learning a new language — it opens up extraordinary possibilities and transforms your cooking from the inside out. Start with a béchamel, master a pan sauce, attempt a vinaigrette. Each one builds your understanding of flavor, technique, and the chemistry of cooking in ways that will serve you for the rest of your culinary life."
+  },
+  {
+    id:14, title:'Grilling Mastery: The Complete Outdoor Cooking Guide',
+    category:'Grilling', date:'September 10, 2024',
+    img:'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=900&q=80',
+    inlineImg:'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=800&q=80',
+    content:`<p>There is something primordially satisfying about cooking over fire. Long before kitchen stoves and induction cooktops, our ancestors gathered around flames to cook their food — and something about that ancient ritual persists in the deep pleasure most people feel when standing over a grill, tongs in hand, surrounded by the intoxicating aromas of wood smoke and sizzling fat. Grilling is, at its heart, the oldest form of cooking and one of the most rewarding to master.</p>
+    <h3>Charcoal vs. Gas: The Great Debate</h3>
+    <p>The debate between charcoal and gas grilling is one of the most passionate in the culinary world. Charcoal evangelists argue that no gas grill can replicate the complex smoky flavors and extremely high temperatures achievable over glowing hardwood coals. Gas proponents point to the convenience, precision, and consistency of a gas grill, which can be lit and ready to cook in minutes.</p>
+    <p>Both camps have valid points. Charcoal grills, particularly kettle grills using high-quality hardwood charcoal, can achieve temperatures exceeding 700°F — hot enough to create the extraordinary sear that produces a perfect crust on a steak. The rendered fat dripping onto the hot coals produces aromatic compounds that flavor the food from below, contributing to the characteristic grilled flavor that gas cannot fully replicate.</p>
+    <p>Gas grills offer unmatched convenience and precise temperature control. You can maintain a consistent temperature across different zones of the grill, which is enormously helpful for two-zone cooking. For weeknight cooking when time is short, being able to grill excellent food on a gas grill in 20 minutes is a genuine advantage. Many serious grillers own both and choose based on the occasion.</p>
+    <h3>Heat Zones and Two-Zone Cooking</h3>
+    <p>Understanding heat management is the single skill that most transforms amateur grilling into expert grilling. The fundamental technique is two-zone cooking: setting up one side of the grill as a hot direct heat zone and the other as a cooler indirect heat zone. This gives you maximum control and flexibility over the cooking process.</p>
+    <p>The hot zone is for searing — creating that beautiful, caramelized crust through the Maillard reaction. The indirect zone is for finishing — gently cooking food through to the center without burning the exterior. For thick proteins like a thick-cut steak, bone-in chicken pieces, or a whole fish, this combination produces results that would be impossible with direct heat alone.</p>
+    <p>Many experienced grillers now swear by the reverse sear method: starting thick-cut steaks in the indirect zone and cooking slowly until the interior is just below the target temperature, then transferring to the screaming hot direct zone for a brief, intense sear to create the crust. This technique produces the most evenly cooked steak imaginable, with a perfectly medium-rare interior from edge to edge and a gorgeous crust.</p>`,
+    takeaways:['Set up two heat zones for maximum control and flexibility','Let the grill get fully preheated before adding food — at least 10-15 minutes','Let meat rest after grilling to allow juices to redistribute','Season generously before grilling — salt and pepper are often all you need','A meat thermometer is non-negotiable for perfect results every time'],
+    faqs:[
+      {q:'How do I prevent food from sticking to the grill grates?',a:"Preheat the grill thoroughly, then clean the grates and oil them just before adding food. Don't move food too soon — it will release naturally when properly seared."},
+      {q:'How do I know when the grill is hot enough?',a:'Hold your hand 5 inches above the grate. High heat (500°F+): you can hold it for 2-3 seconds. Medium heat (375-450°F): 4-5 seconds. Medium-low: 6-7 seconds.'},
+      {q:'Should I marinate everything before grilling?',a:"No. Quality proteins — a good steak, fresh fish — need only salt, pepper, and a brush of oil. Marinades work well for tougher cuts and chicken thighs, adding both flavor and tenderness."},
+      {q:'What internal temperature should different proteins reach?',a:'Steak: 125°F (rare) to 165°F (well done). Chicken breasts: 165°F. Pork: 145°F. Fish: 145°F. Use an instant-read thermometer for accuracy.'},
+      {q:'How do I add smoke flavor without a smoker?',a:'Add wood chips (soaked in water for 30 min) directly to charcoal, or place them in a foil packet with holes on a gas burner. Hardwoods like hickory, apple, and cherry provide distinct smoke flavors.'},
+    ],
+    conclusion:"Mastering the grill is a journey that rewards every session with deepening knowledge and improving results. Learn to manage your heat, understand two-zone cooking, and develop an instinct for when food is ready. The grill will become not just a cooking appliance but a source of real pleasure, bringing people together around food that nourishes body and soul."
+  },
+  {
+    id:15, title:'Exploring Thai Cuisine: Balance, Freshness, and Bold Flavors',
+    category:'World Cuisine', date:'September 3, 2024',
+    img:'https://images.unsplash.com/photo-1562565652-a0d8f0c59eb4?w=900&q=80',
+    inlineImg:'https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=800&q=80',
+    content:`<p>Thai cuisine is one of the world's great culinary achievements — a sophisticated balance of flavors that is simultaneously simple and complex, rustic and refined, comforting and exciting. The cuisine has captivated the world for good reason: when you eat really well-made Thai food, the interplay of sweet, salty, sour, spicy, and umami is so perfectly calibrated that each bite is deeply satisfying in a way that few other cuisines achieve.</p>
+    <h3>The Philosophy of Balance</h3>
+    <p>At the core of Thai cooking philosophy is the principle of balance — balancing the four key flavors: sweet, salty, sour, and spicy. Unlike many Western cuisines, where one flavor profile typically dominates (French cuisine might emphasize rich, savory depth; Italian cuisine, the brightness of fresh tomato and herb), Thai cuisine pursues the simultaneous presence of all these flavors in harmonious balance.</p>
+    <p>Every Thai cook learns to constantly taste and adjust throughout the cooking process. Is the curry too salty? Add palm sugar. Not enough heat? Add more fresh chilies or white pepper. Lacking brightness? A squeeze of lime or a splash of tamarind. Too spicy? Add coconut milk or a touch more fish sauce and sugar. This constant adjustment and calibration is not a sign of imprecision — it's the craft itself.</p>
+    <h3>The Essential Ingredients</h3>
+    <p>Thai cooking relies on a pantry of distinctive ingredients that combine to create its characteristic flavors. Fish sauce is the salt of Thai cooking — it provides not just saltiness but deep umami and a fermented complexity that salt alone cannot provide. Quality fish sauce should have an appetizing, savory aroma rather than an overwhelmingly fishy one; the aroma mellows dramatically during cooking.</p>
+    <p>Fresh lemongrass is among the most distinctive flavors in the Thai pantry — a citrusy, grassy, slightly floral aroma that perfumes curries, soups, and marinades. Only the lower, pale portion of the stalk contains significant flavor; the outer layers are removed and the remaining inner stalk is either finely sliced for dishes where it will be eaten, or bruised and cut into larger pieces to infuse flavor into soups and curries before being removed.</p>
+    <p>Galangal, kaffir lime leaves, and fresh Thai basil complete the aromatic foundation of many Thai dishes. Galangal looks similar to ginger but has a completely different flavor — piney, citrusy, and sharper. Kaffir lime leaves have an intensely aromatic, citrusy fragrance that is irreplaceable in curries and soups. And Thai basil, with its anise-forward flavor and sturdy leaves that hold up to heat, is completely different from Italian basil and should not be substituted for it.</p>`,
+    takeaways:['Balance is the core principle: always have sweet, salty, sour, and spicy in dialogue','Fish sauce provides umami depth that salt alone cannot replicate','Fresh aromatics — lemongrass, galangal, kaffir lime — are non-negotiable for authentic flavor','Taste constantly and adjust throughout cooking; calibration is the craft','Many Thai dishes come together in minutes once the paste or sauce is prepared'],
+    faqs:[
+      {q:'Is Thai food always very spicy?',a:'Thai food exists across a wide spectrum of heat. Many beloved dishes like Pad Thai and Massaman curry are mild to medium. Heat level is typically adjustable by controlling the amount of fresh chilies used.'},
+      {q:'Can I substitute ingredients in Thai cooking?',a:'Some substitutions work better than others. Fish sauce is difficult to replace (try soy sauce with a little lime juice). Fresh lemongrass has no good substitute. Thai basil is different from Italian basil and should not be swapped.'},
+      {q:'What is the difference between red, green, and yellow Thai curry pastes?',a:'Green curry is the hottest, made from fresh green chilies. Red curry uses dried red chilies for a deeper, earthier flavor. Yellow curry uses turmeric and dried yellow chilies and tends to be milder and slightly sweet.'},
+      {q:'Do I need to make my own curry paste?',a:"Homemade curry paste is incomparably superior but requires significant time and effort. High-quality jarred pastes (Maesri and Maeploy are excellent brands) produce very good results and are a perfectly acceptable choice."},
+      {q:'How do I prevent coconut milk from splitting in curries?',a:"Use full-fat coconut milk and don't let it boil vigorously for extended periods. You can also reduce the coconut milk first until the fat separates intentionally (this is a traditional Thai technique for frying curry paste)."},
+    ],
+    conclusion:"Thai cuisine rewards both the curious beginner and the experienced cook with an endlessly fascinating culinary system built on balance, freshness, and extraordinary aromatic complexity. Begin with the classics — a fragrant green curry, a perfect pad thai — and let your curiosity guide you deeper into one of the world's most exciting culinary traditions."
+  },
+  {
+    id:16, title:'The World of Chocolate: From Bean to Bar',
+    category:'Desserts', date:'August 25, 2024',
+    img:'https://images.unsplash.com/photo-1481391319762-47dff72954d9?w=900&q=80',
+    inlineImg:'https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=800&q=80',
+    content:`<p>Chocolate is perhaps the world's most universally loved food. From the ceremonial cacao drinks of the ancient Maya to the sophisticated bean-to-bar chocolates of modern artisan chocolatiers, the story of chocolate spans thousands of years and encompasses botany, chemistry, geopolitics, and extraordinary culinary artistry. Understanding chocolate — where it comes from, how it's made, and how its qualities vary — transforms your relationship with it both as a pleasure and as a cooking ingredient.</p>
+    <h3>From Cacao Bean to Chocolate</h3>
+    <p>The cacao tree (Theobroma cacao — literally "food of the gods") grows only within approximately 20 degrees of the equator, in tropical regions of West Africa, Latin America, and Southeast Asia. The tree produces large, colorful pods that grow directly from the trunk, each containing 20-50 cacao beans surrounded by a sweet, white pulp. Harvesting these pods by hand, cracking them open, and scooping out the beans is still largely done manually in most producing regions.</p>
+    <p>After harvesting, the beans undergo fermentation — a critical process that lasts 5-7 days and is responsible for developing the flavor precursors that will become chocolate's complex taste profile. Without proper fermentation, chocolate tastes flat and bitter. The beans are then dried, sorted, and shipped to processing facilities, where they undergo roasting (which develops flavor through Maillard reactions, similar to coffee), cracking, winnowing (removing the outer shell), and grinding into a paste called chocolate liquor.</p>
+    <p>This chocolate liquor can be processed further into cocoa butter and cocoa powder, or combined with sugar, additional cocoa butter, milk solids, and other ingredients to make chocolate. Conching — a long process of mechanical mixing and aeration that lasts anywhere from a few hours to several days — further develops flavor and texture, producing chocolate's characteristic smoothness.</p>
+    <h3>The Importance of Cacao Percentage and Origin</h3>
+    <p>The percentage on a chocolate bar refers to the total proportion of cacao-derived ingredients, including chocolate liquor and cocoa butter. A 70% dark chocolate contains 70% cacao-derived ingredients and 30% other ingredients, primarily sugar. Higher percentages generally (but not always) mean more bitter, more complex, more intensely chocolatey character and less sweetness.</p>
+    <p>Cacao origin has a dramatic influence on flavor, much like terroir in wine. Criollo cacao from Venezuela tends toward fruity, delicate flavors. Ecuadorian Nacional cacao is prized for floral, fruity, and nutty notes. West African cacao (which makes up the majority of global supply) tends toward robust, earthy, more straightforwardly chocolatey flavors that are ideal for milk chocolate and commercial applications. Single-origin chocolates showcase these terroir-driven differences with remarkable clarity.</p>`,
+    takeaways:['Fermentation is the most important step in developing chocolate flavor','Higher cacao percentage doesn\'t automatically mean better quality','Single-origin chocolate reveals the terroir and variety of the cacao','Store chocolate properly — away from heat, light, moisture, and strong odors','Use the appropriate chocolate for each application — baking vs. eating quality varies'],
+    faqs:[
+      {q:'What is the difference between cacao and cocoa?',a:"'Cacao' typically refers to the raw, unprocessed bean and products made with minimal heat. 'Cocoa' usually refers to the processed powder. In practice, these terms are often used interchangeably."},
+      {q:'Can I substitute cocoa powder for melted chocolate in recipes?',a:"Sometimes, but not always directly. Cocoa powder lacks the fat (cocoa butter) found in solid chocolate. To substitute, use approximately 3 tablespoons cocoa powder plus 1 tablespoon fat per ounce of unsweetened chocolate."},
+      {q:'What does "tempering" chocolate mean?',a:"Tempering is a process of carefully heating and cooling chocolate to specific temperatures to stabilize its crystal structure. Properly tempered chocolate has a glossy appearance, satisfying snap, and melts evenly. It's essential for dipping and molding."},
+      {q:'What does "Dutch-process" cocoa mean?',a:"Dutch-process cocoa has been treated with an alkali to neutralize its natural acidity. It has a darker color, milder flavor, and does not react with baking soda. It's not interchangeable with natural (non-Dutch-processed) cocoa in all recipes."},
+      {q:'How should I store chocolate to maintain quality?',a:"Store chocolate in an airtight container in a cool, dry place around 65-68°F (18-20°C). Avoid the refrigerator if possible — moisture and odors can affect quality. Dark chocolate keeps for 2 years; milk chocolate for 1 year."},
+    ],
+    conclusion:"Chocolate is an extraordinary subject — a food that spans botany, chemistry, history, and extraordinary sensory pleasure. The more you understand about it, the more you appreciate the complexity of even a simple square of dark chocolate and the remarkable alchemy of the people who transform a humble tropical bean into something so universally beloved."
+  },
+  {
+    id:17, title:'Mastering the Roast: A Complete Guide to Perfect Roasting',
+    category:'Techniques', date:'August 18, 2024',
+    img:'https://images.unsplash.com/photo-1544025162-d76694265947?w=900&q=80',
+    inlineImg:'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80',
+    content:`<p>Roasting is one of the oldest and most fundamental cooking techniques, yet it remains one of the most rewarding to master. Whether you're roasting a whole chicken to golden, crisp-skinned perfection, achieving caramelized, tender roasted vegetables, or producing a beautifully blushing leg of lamb for a special occasion, understanding the principles behind roasting unlocks a world of delicious possibilities.</p>
+    <h3>The Science of Roasting</h3>
+    <p>Roasting works through dry heat surrounding food from all directions, causing a cascade of chemical reactions. The Maillard reaction — the complex browning process that occurs when proteins and sugars in food are exposed to heat above about 280°F (138°C) — creates hundreds of new flavor compounds, producing the deeply savory, complex flavors and aromas that make roasted food so appealing.</p>
+    <p>Caramelization, the browning of sugars at even higher temperatures, contributes sweet, nutty, bitter, and complex flavors particularly important in roasted vegetables. And within the food, proteins coagulate, fats render and baste the surrounding meat, and moisture evaporates, concentrating flavors. All of this happens simultaneously during roasting, which is why the results can be so extraordinary.</p>
+    <h3>Temperature Strategy</h3>
+    <p>One of the most important variables in roasting is temperature, and the strategic use of high and lower temperatures can produce very different and sometimes superior results. High-heat roasting (425°F/220°C and above) produces rapid browning and crisping but can be unforgiving with larger items, which may brown on the outside before cooking through. Lower-heat roasting (325°F/165°C) cooks more gently and evenly but requires longer times and often produces less browning.</p>
+    <p>Many experienced cooks use a combination: starting at high heat to develop browning and crisping, then reducing to lower heat to finish cooking the interior gently. Alternatively, some prefer to roast at low heat throughout and finish with a blast of high heat for browning. Both techniques produce excellent results and are worth experimenting with.</p>
+    <p>Resting is absolutely critical after roasting meat. When meat is removed from the oven, its internal temperature continues rising (carryover cooking) and the muscle fibers, contracted by heat, begin to relax and reabsorb the juices they expelled during cooking. If you cut immediately, those juices run out onto the cutting board. Resting for 5-20 minutes (depending on size) ensures juicy, properly cooked meat.</p>`,
+    takeaways:['The Maillard reaction is the source of roasting\'s most complex flavors','Use a meat thermometer — temperature, not time, determines doneness','Always rest meat before carving to retain juices','Pat proteins dry before roasting for the best browning','High heat for browning, lower heat for gentle cooking — use both strategically'],
+    faqs:[
+      {q:'Why is my roasted chicken skin not getting crispy?',a:'Most common causes: the skin was wet (pat dry thoroughly before roasting), the oven temperature was too low, or the chicken was not at room temperature before roasting. Drying the chicken uncovered in the refrigerator overnight helps enormously.'},
+      {q:'Should I cover my roast with foil during cooking?',a:'Covering with foil traps steam and prevents browning — it essentially braises rather than roasts. For most roasting applications, you want an uncovered roast. You might tent loosely with foil near the end if browning is happening too quickly.'},
+      {q:'How do I prevent roasted vegetables from getting soggy?',a:"Don't overcrowd the pan — each piece needs space for moisture to evaporate. Use high heat. Dry vegetables thoroughly before tossing with oil. A convection setting helps greatly."},
+      {q:'What is the difference between baking and roasting?',a:"The terms are often used interchangeably for dry-heat oven cooking. 'Roasting' typically refers to cooking whole or large pieces of food at higher temperatures, while 'baking' refers to producing pastry, bread, and prepared dishes at lower, more moderate heat."},
+      {q:'How do I make pan gravy from roast drippings?',a:'After removing the roast, pour off most of the fat from the pan, leaving the browned drippings. Add flour directly to the pan over medium heat and cook, whisking, for 1-2 minutes. Gradually add stock or wine, whisking constantly, until smooth and thickened.'},
+    ],
+    conclusion:"Roasting is one of those techniques that rewards attention and practice with consistently spectacular results. Master the fundamentals — proper temperature management, the importance of resting, and the value of a good thermometer — and you'll produce roasts that earn genuine admiration from everyone lucky enough to be at your table."
+  },
+  {
+    id:18, title:'Plant-Based Cooking: Flavor-First Approach to Vegetarian Food',
+    category:'Plant-Based', date:'August 10, 2024',
+    img:'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=900&q=80',
+    inlineImg:'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=800&q=80',
+    content:`<p>The greatest revolution in plant-based cooking in recent years is not the proliferation of meat substitutes or the growing availability of plant-based alternatives to dairy products. It's the growing recognition among chefs, food writers, and home cooks that vegetables, grains, legumes, and other plant foods are not substitutes for anything — they are complete, complex, delicious foods in their own right, capable of producing dishes of extraordinary flavor, depth, and satisfaction.</p>
+    <h3>Rethinking the Plate</h3>
+    <p>The traditional Western approach to meal planning is protein-centric: choose a meat, fish, or poultry as the centerpiece and build the rest of the meal around it. Plant-based cooking invites a fundamental reconceptualization of this approach. Instead of thinking about what to replace the meat with, think about building dishes around the most flavorful, most interesting plant ingredients you have available.</p>
+    <p>A whole roasted cauliflower, properly seasoned and cooked to golden, caramelized perfection, is not a poor substitute for roast chicken — it's a spectacular dish in its own right with a flavor profile that chicken simply doesn't have. A deeply seasoned, richly spiced lentil dahl is not "just soup without meat" — it's one of the world's great comfort foods, developed over thousands of years of culinary tradition. Approaching vegetables with this kind of respect and intentionality is the first step toward truly great plant-based cooking.</p>
+    <h3>Building Depth and Umami Without Meat</h3>
+    <p>One of the most common criticisms of vegetarian cooking is that it lacks the depth and savoriness of meat-based dishes. This is absolutely true of poorly made vegetarian food, but it doesn't have to be. The umami compounds that make meat so satisfying — primarily glutamates and nucleotides — are also found in many plant ingredients, often in higher concentrations.</p>
+    <p>The key is knowing which ingredients to reach for. Dried mushrooms — particularly porcini, shiitake, and morels — are extraordinary umami sources, and their soaking water is essentially vegetable stock with extraordinary depth. Tomato paste cooked down in oil develops deep, complex savory flavors. Soy sauce, miso, and nutritional yeast each provide umami depth that can transform simple dishes.</p>
+    <p>Cooking techniques that create the Maillard reaction — roasting, searing, grilling — are just as available to vegetables as to meat, and they produce the same kind of complex, caramelized flavors. A properly seared mushroom or a well-roasted eggplant develops flavors that have genuine depth and complexity. The key is applying enough heat with enough exposure time for browning to develop properly.</p>
+    <h3>Texture is Everything</h3>
+    <p>If umami provides the satisfying depth in plant-based cooking, texture provides the interest and engagement that makes eating genuinely pleasurable. A one-note, uniformly soft dish of cooked vegetables is less satisfying than the same ingredients cooked with attention to contrasting textures: caramelized and tender on the outside, with some crisp, raw elements; creamy elements balanced with crunchy ones; chewy grains alongside silky purées.</p>
+    <p>Think of your dish as having textural layers: a creamy base (hummus, bean purée, polenta), a substantial middle element (roasted vegetables, sautéed mushrooms, braised lentils), and something with crunch and freshness to finish (toasted nuts, fresh herbs, pickled vegetables, crispy chickpeas). This architecture of textures is what makes plant-based dishes genuinely exciting to eat rather than merely nutritious.</p>`,
+    takeaways:['Approach vegetables as the star, not the substitute — they deserve center stage','Build umami through dried mushrooms, miso, tomato paste, soy sauce, and nutritional yeast','Apply high-heat cooking techniques (roasting, searing) to develop complex flavors in vegetables','Layer textures — creamy, chewy, crunchy — for genuinely satisfying dishes','Season more assertively than you might with meat-based dishes'],
+    faqs:[
+      {q:'Is plant-based cooking automatically healthier?',a:"Not necessarily. Plant-based eating can be very healthy when centered around whole foods, but highly processed plant-based products can be just as problematic nutritionally as any other processed food. Whole food plant-based eating is what the research supports."},
+      {q:'How do I get enough protein on a plant-based diet?',a:'Legumes (lentils, beans, chickpeas), tofu, tempeh, edamame, seitan, nutritional yeast, and whole grains all provide protein. Combining different plant protein sources throughout the day ensures you get all essential amino acids.'},
+      {q:'What are the most versatile plant-based protein sources?',a:'Lentils are enormously versatile — green for salads and sides, red for soups and dahls, black for their dramatic appearance. Chickpeas work in everything from curries to hummus to roasted snacks. Tofu absorbs flavors beautifully and can be used across many cuisines.'},
+      {q:'How do I make plant-based dishes more satisfying and filling?',a:'Ensure adequate protein and fat in every meal. Fat from olive oil, avocado, nuts, and seeds slows digestion and promotes satiety. High-fiber foods like legumes and whole grains also promote fullness.'},
+      {q:'Is it difficult to transition to more plant-based eating?',a:"Not if you take a gradual approach. Start by adding one or two plant-based meals per week rather than eliminating animal products entirely. Focus on delicious recipes you genuinely love rather than restriction."},
+    ],
+    conclusion:"Plant-based cooking at its best is not about sacrifice or substitution — it's about discovering a world of flavors, textures, and ingredients that are genuinely exciting and delicious in their own right. Approach it with curiosity and creativity, and you'll find that adding more plant-based meals to your repertoire enriches your cooking life rather than limiting it."
+  },
+  {
+    id:19, title:'The Joy of Baking Cookies: A Complete Guide to Every Style',
+    category:'Baking', date:'August 3, 2024',
+    img:'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=900&q=80',
+    inlineImg:'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=800&q=80',
+    content:`<p>Is there anything more universally beloved than a freshly baked cookie? The crisp snap of a thin, buttery shortbread. The chewy, gooey center of a chocolate chip cookie pulled from the oven just slightly underdone. The tender, spiced crumble of a snickerdoodle. The satisfying, dense chew of a properly made oatmeal raisin. Cookies are one of baking's greatest pleasures, and understanding the factors that determine their texture and flavor gives you the power to customize them to perfection.</p>
+    <h3>The Science of Cookie Texture</h3>
+    <p>Cookie texture is determined by the careful balance of a handful of variables: the ratio of fat to sugar to flour, the type of sugar used, the amount of liquid in the recipe, the leavening, the baking temperature, and critically, the baking time. Changing any one of these variables shifts the balance of the final cookie's texture along a spectrum from crisp and crunchy to chewy to soft and cakey.</p>
+    <p>Sugar type matters enormously. White sugar promotes spread and crispness — it melts during baking and doesn't hold moisture well, producing thinner, crispier cookies. Brown sugar, with its molasses content, is hygroscopic (it absorbs moisture from the air) and produces chewier, more flavorful, denser cookies. Most chocolate chip cookie recipes use a combination, and adjusting the ratio allows you to dial in exactly the texture you prefer.</p>
+    <p>Fat choice is equally important. Butter contains approximately 20% water and milk solids, and these play important roles in cookie texture and flavor. The milk solids participate in Maillard browning, giving butter-based cookies their characteristic golden color and rich flavor. The water creates steam during baking that can promote lift. Cookies made with melted butter tend to be chewier than those made with creamed butter, because the creaming process incorporates air that contributes to lift and lightness.</p>
+    <h3>The Chocolate Chip Cookie Deep Dive</h3>
+    <p>The chocolate chip cookie is arguably America's most beloved baked good, and it's a recipe that rewards deep understanding and thoughtful experimentation. Ruth Wakefield's original Toll House recipe from the 1930s established the template, but in the decades since, bakers have developed countless techniques for optimizing the classic.</p>
+    <p>Browning the butter is perhaps the single most impactful modification you can make to a chocolate chip cookie recipe. By cooking the butter until the milk solids toast to a golden brown, you develop nutty, caramel-like flavors that add remarkable depth to the final cookie without changing its texture. The water lost during browning also affects texture slightly — cookies made with browned butter tend to be chewier and denser.</p>
+    <p>Resting the dough in the refrigerator for 24-72 hours — a technique popularized by Jacques Torres and extensively studied by food scientists — allows the flour to fully hydrate, the sugars to partially break down and caramelize more readily during baking, and the flavors to develop and meld. The result is a cookie with notably more complex flavor and a more nuanced texture. If you have time, this step is absolutely worth it.</p>
+    <h3>Mastering Different Cookie Styles</h3>
+    <p>The cookie world extends far beyond chocolate chip. Shortbread, with its minimal ingredients — butter, sugar, flour, and nothing else — is a study in simplicity that rewards the highest quality ingredients and careful execution. The key is not overworking the dough, which would develop gluten and make the shortbread tough rather than tenderly crumbly.</p>
+    <p>Macarons — the French sandwich cookies of almond meal and aged egg whites — are legendary for their difficulty, but they're actually quite achievable with proper technique and practice. The challenges are macaronage (developing the batter to exactly the right consistency), resting the piped shells until they form a skin, and baking at exactly the right temperature to develop the characteristic "feet" at the base of each shell.</p>`,
+    takeaways:['Brown sugar creates chewier cookies; white sugar promotes spread and crispness','Browning butter adds remarkable depth of flavor with minimal effort','Resting cookie dough in the refrigerator significantly improves flavor and texture','Underbaking slightly (for soft cookies) and allowing to cool on the pan produces the best texture','Room-temperature ingredients incorporate more evenly for consistent results'],
+    faqs:[
+      {q:'Why are my cookies spreading too much?',a:"Common causes: butter too warm or melted, not enough flour, too much sugar, baking sheets not adequately cooled between batches. Chill your dough and bake on cool, lined sheets."},
+      {q:'How do I make my cookies chewier?',a:'Use more brown sugar than white, add an extra egg yolk, use bread flour instead of all-purpose, underbake slightly, and rest the dough before baking. Melted rather than creamed butter also promotes chewiness.'},
+      {q:'What type of chocolate is best for chocolate chip cookies?',a:"It's personal preference, but many bakers prefer roughly chopped chocolate bars over chips — they melt more dramatically, creating better pools and streaks of chocolate. Choose 60-70% dark for the best balance of flavor and sweetness."},
+      {q:'Can I freeze cookie dough?',a:'Yes! Portion and freeze on a tray until solid, then transfer to bags. Bake directly from frozen, adding 2-3 minutes to the baking time. Frozen dough keeps for 3 months and delivers freshly baked cookies on demand.'},
+      {q:'Why do my cookies come out flat?',a:'Often due to: expired leavening, too much butter, butter too warm when incorporated, or insufficient flour. Measure flour by spooning into the measuring cup and leveling — not scooping, which packs too much flour.'},
+    ],
+    conclusion:"Cookies are one of baking's greatest joys precisely because they're both simple and endlessly explorable. Once you understand the fundamental variables that control texture and flavor, you can experiment with confidence, adjusting ratios and techniques to create exactly the cookie of your dreams. Bake with joy, share generously, and never stop experimenting."
+  },
+  {
+    id:20, title:'Indian Curry Masterclass: A Deep Dive into Techniques and Flavors',
+    category:'South Asian', date:'July 28, 2024',
+    img:'https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=900&q=80',
+    inlineImg:'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&q=80',
+    content:`<p>The word "curry" — a British colonial simplification of the Tamil word "kari" meaning sauce — has come to encompass one of the most diverse, complex, and globally beloved categories of food on the planet. Indian curry is not one thing; it is thousands of things — a vast, regional, seasonal, and endlessly varied culinary tradition that reflects the extraordinary diversity of the subcontinent itself. From the coconut milk-based curries of Kerala to the robust, tomato-forward gravies of Punjabi cooking; from the fragrant, saffron-tinged biryanis of Lucknow to the fiery vindaloos of Goa, curry defies simple categorization and rewards deep exploration.</p>
+    <h3>The Anatomy of a Curry</h3>
+    <p>Despite their extraordinary diversity, most Indian curries share a fundamental architecture. They begin with building an aromatic base: onion, garlic, ginger, and sometimes whole spices, cooked slowly in oil or ghee until the onions are deep golden brown and their raw, sharp character has been transformed into sweet, complex depth. This base, called the masala, is the foundation on which the entire flavor profile of the curry is built.</p>
+    <p>Cooking the onions properly is perhaps the single most important step in curry making, and it cannot be rushed. The onions must be cooked at medium heat for a minimum of 20-25 minutes — often longer — until they are uniformly deep golden and have shrunk dramatically. Undercooked onions produce a curry that tastes raw and sharp. Overcooked, burned onions produce bitterness. The sweet spot of deep golden takes time, patience, and a watchful eye.</p>
+    <p>To the caramelized onion base, you add your spice blend — either a premade garam masala or individual spices depending on the regional tradition and the specific dish. The spices bloom in the hot oil for 30-60 seconds, their volatile aromatic compounds dissolving into the fat and infusing it with extraordinary fragrance. This step transforms the dish from merely seasoned to deeply, integrally spiced.</p>
+    <h3>The Role of Tomatoes and Dairy</h3>
+    <p>Many North Indian curries incorporate both tomatoes and dairy — cream, yogurt, or paneer — to create their characteristic balance of acidity, richness, and depth. Tomatoes provide acidity and natural sweetness, and when cooked down thoroughly with the spice-infused onion base until the raw tomato flavor is completely gone and the mixture begins to pull away from the sides of the pan, they become the concentrated, deeply flavored gravy base that defines countless beloved dishes.</p>
+    <p>Yogurt, when whisked into a hot curry, must be added carefully to prevent curdling. The best technique is to temper it: take a spoonful of the hot curry and whisk it into the yogurt before adding the yogurt to the pan. Lower heat to medium, whisk constantly while adding the yogurt in a slow stream, and bring back to a gentle simmer rather than a boil. Yogurt adds a pleasant tang and silky texture that cream cannot exactly replicate.</p>
+    <p>Ghee — clarified butter purified of its water and milk solids — is the traditional cooking fat for many Indian curries and for excellent reason. Its pure butterfat composition means it can be heated to higher temperatures than regular butter without burning. Its flavor is rich and nutty with a delicate sweetness that enhances the overall taste of the dish. A tablespoon of ghee added at the end of cooking — a technique called tadka or tarka — is a common finishing touch that adds a final layer of richness and aroma.</p>
+    <h3>Regional Curry Traditions</h3>
+    <p>Understanding regional differences within Indian curry is endlessly fascinating. Punjabi cooking, from the northern state of Punjab, is characterized by robust, tomato-and-onion-based gravies, generous use of ghee, and bold, unapologetic spicing. Butter chicken, dal makhani, and palak paneer are iconic Punjabi dishes that have conquered the world precisely because their flavors are so deeply satisfying.</p>
+    <p>South Indian curry traditions are dramatically different. Coconut — in the form of freshly grated flesh, coconut milk, or coconut cream — features prominently, producing curries that are gentler, more aromatic, and have a characteristic sweetness. Mustard seeds are a foundational tempering spice rather than the cumin and coriander typical of the North. Curry leaves — unavailable fresh in most Western countries but transformative in their flavor contribution — are an essential aromatic in virtually every South Indian dish.</p>
+    <p>Goan cuisine reflects its Portuguese colonial history with the use of vinegar (particularly in vindaloo and cafreal), pork (rare in most of India due to religious dietary traditions), and technique. A proper vindaloo is a complex, vinegar-marinated pork dish with a balance of heat, tang, and sweet spice that bears little resemblance to the throat-burningly hot dish of the same name commonly found in British Indian restaurants.</p>`,
+    takeaways:['Cook onions until deep golden — not golden-brown, but deep amber — for proper curry depth','Never rush the onion and tomato cooking process; it is foundational to the curry\'s flavor','Temper yogurt before adding it to hot curries to prevent curdling','Bloom whole spices in oil before adding other ingredients for maximum aromatic impact','Regional Indian curries differ dramatically — explore beyond the familiar handful of restaurant dishes'],
+    faqs:[
+      {q:'What is the difference between curry powder and garam masala?',a:"Curry powder is a British invention — a standardized spice blend not traditionally used in Indian cooking. Garam masala is a warming Indian spice blend (its composition varies by region) added at the end of cooking to perfume a dish. Neither should be used as the other's substitute."},
+      {q:'How do I make my curry less oily?',a:"Indian curries traditionally use significant oil, which carries flavor and has a specific cultural function. To reduce oil without sacrificing flavor, reduce the amount used initially and add a small amount of ghee at the end for aroma."},
+      {q:'Why does restaurant curry taste different from homemade?',a:'Restaurant curries are often made in large batches with significantly more fat and salt than home cooking. The base gravies are also often pre-cooked and concentrated. Longer, slower cooking and using high-quality spices narrows the gap considerably.'},
+      {q:'Is curry always very spicy?',a:'Not at all. Heat in Indian cooking comes primarily from fresh chilies and dried chili powder, which are completely controllable by the cook. Many beloved Indian dishes — like dal makhani, korma, and malai kofta — are mild to medium at most.'},
+      {q:"What is 'tempering' in Indian cooking?",a:"Tempering (tadka or chaunk) involves heating whole spices, dried chilies, and/or aromatics in hot fat until they sizzle and release their flavors, then pouring this infused fat over a finished dish. It's a finishing technique used in many Indian dishes."},
+    ],
+    conclusion:"Indian curry making is a lifetime culinary pursuit that rewards patience, curiosity, and practice. Begin with a few dishes that speak to you, invest in quality spices, and take the time that the onions and tomatoes deserve. As you cook more Indian food, you'll develop an intuitive understanding of spice balancing, flavor building, and the extraordinary depth that good technique and proper time can create."
+  }
+];
+
+let blogsData = JSON.parse(localStorage.getItem('mariasKitchenBlogs') || 'null') || blogs;
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function showSection(name) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.getElementById('section-' + name).classList.add('active');
+  document.getElementById('nav-' + name).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ============================================================
+// ADMIN
+// ============================================================
+function showAdminLogin() {
+  if (isAdmin) { logout(); return; }
+  document.getElementById('admin-login-modal').classList.add('open');
+  setTimeout(() => document.getElementById('admin-password').focus(), 100);
+}
+function closeAdminLogin() { document.getElementById('admin-login-modal').classList.remove('open'); document.getElementById('admin-password').value = ''; }
+function attemptLogin() {
+  const pw = document.getElementById('admin-password').value;
+  if (pw === ADMIN_PASSWORD) {
+    isAdmin = true;
+    document.body.classList.add('admin-mode');
+    document.getElementById('admin-nav-btn').textContent = 'Logout';
+    closeAdminLogin();
+    showToast('Welcome back, Maria! 👋 Admin mode active.');
+    enableEditableFields();
+  } else {
+    alert('Incorrect password. Please try again.');
+  }
+}
+function logout() {
+  isAdmin = false;
+  document.body.classList.remove('admin-mode');
+  document.getElementById('admin-nav-btn').textContent = 'Admin';
+  disableEditableFields();
+  showToast('Logged out successfully.');
+}
+function enableEditableFields() { document.querySelectorAll('[data-editable]').forEach(el => el.setAttribute('contenteditable','true')); }
+function disableEditableFields() { document.querySelectorAll('[data-editable]').forEach(el => el.setAttribute('contenteditable','false')); }
+
+// ============================================================
+// ABOUT EDIT
+// ============================================================
+let aboutBackup = {};
+function enableAboutEdit() {
+  if (!isAdmin) return;
+  ['about-name','about-bio1','about-bio2','about-bio3','stat1','stat2','stat3'].forEach(id => {
+    const el = document.getElementById(id);
+    aboutBackup[id] = el.innerText;
+    el.setAttribute('contenteditable','true');
+  });
+  document.getElementById('save-about-btn').style.display = 'inline-block';
+  document.getElementById('cancel-about-btn').style.display = 'inline-block';
+  document.querySelector('.edit-btn[onclick="enableAboutEdit()"]').style.display = 'none';
+}
+function saveAbout() {
+  ['about-name','about-bio1','about-bio2','about-bio3','stat1','stat2','stat3'].forEach(id => {
+    document.getElementById(id).setAttribute('contenteditable','false');
+  });
+  document.getElementById('save-about-btn').style.display = 'none';
+  document.getElementById('cancel-about-btn').style.display = 'none';
+  document.querySelector('.edit-btn[onclick="enableAboutEdit()"]').style.display = 'inline-block';
+  // Save to localStorage
+  const data = {};
+  ['about-name','about-bio1','about-bio2','about-bio3','stat1','stat2','stat3'].forEach(id => { data[id] = document.getElementById(id).innerText; });
+  localStorage.setItem('mariasAbout', JSON.stringify(data));
+  showToast('About section saved!');
+}
+function cancelAbout() {
+  ['about-name','about-bio1','about-bio2','about-bio3','stat1','stat2','stat3'].forEach(id => {
+    document.getElementById(id).innerText = aboutBackup[id];
+    document.getElementById(id).setAttribute('contenteditable','false');
+  });
+  document.getElementById('save-about-btn').style.display = 'none';
+  document.getElementById('cancel-about-btn').style.display = 'none';
+  document.querySelector('.edit-btn[onclick="enableAboutEdit()"]').style.display = 'inline-block';
+}
+function loadAboutData() {
+  const saved = localStorage.getItem('mariasAbout');
+  if (saved) {
+    const data = JSON.parse(saved);
+    Object.keys(data).forEach(id => { if (document.getElementById(id)) document.getElementById(id).innerText = data[id]; });
+  }
+}
+
+// CONTACT EDIT
+let contactBackup = {};
+function enableContactEdit() {
+  if (!isAdmin) return;
+  ['contact-heading','contact-desc','contact-email','contact-social','contact-location'].forEach(id => {
+    const el = document.getElementById(id);
+    contactBackup[id] = el.innerText;
+    el.setAttribute('contenteditable','true');
+  });
+  document.getElementById('save-contact-btn').style.display = 'inline-block';
+  document.getElementById('cancel-contact-btn').style.display = 'inline-block';
+  document.querySelector('.edit-btn[onclick="enableContactEdit()"]').style.display = 'none';
+}
+function saveContact() {
+  ['contact-heading','contact-desc','contact-email','contact-social','contact-location'].forEach(id => {
+    document.getElementById(id).setAttribute('contenteditable','false');
+  });
+  document.getElementById('save-contact-btn').style.display = 'none';
+  document.getElementById('cancel-contact-btn').style.display = 'none';
+  document.querySelector('.edit-btn[onclick="enableContactEdit()"]').style.display = 'inline-block';
+  const data = {};
+  ['contact-heading','contact-desc','contact-email','contact-social','contact-location'].forEach(id => { data[id] = document.getElementById(id).innerText; });
+  localStorage.setItem('mariasContact', JSON.stringify(data));
+  showToast('Contact section saved!');
+}
+function cancelContact() {
+  ['contact-heading','contact-desc','contact-email','contact-social','contact-location'].forEach(id => {
+    document.getElementById(id).innerText = contactBackup[id];
+    document.getElementById(id).setAttribute('contenteditable','false');
+  });
+  document.getElementById('save-contact-btn').style.display = 'none';
+  document.getElementById('cancel-contact-btn').style.display = 'none';
+  document.querySelector('.edit-btn[onclick="enableContactEdit()"]').style.display = 'inline-block';
+}
+function loadContactData() {
+  const saved = localStorage.getItem('mariasContact');
+  if (saved) {
+    const data = JSON.parse(saved);
+    Object.keys(data).forEach(id => { if (document.getElementById(id)) document.getElementById(id).innerText = data[id]; });
+  }
+}
+
+function toggleEdit(h, p) {
+  if (!isAdmin) return;
+  document.getElementById(h).setAttribute('contenteditable','true');
+  document.getElementById(p).setAttribute('contenteditable','true');
+  document.querySelector(`#save-recipes-section`).style.display = 'inline-block';
+}
+function saveEdit(h, p, saveId, editId) {
+  document.getElementById(h).setAttribute('contenteditable','false');
+  document.getElementById(p).setAttribute('contenteditable','false');
+  document.getElementById(saveId).style.display = 'none';
+  localStorage.setItem('recipes-section', JSON.stringify({ h: document.getElementById(h).innerText, p: document.getElementById(p).innerText }));
+  showToast('Section saved!');
+}
+
+// ============================================================
+// RENDER RECIPES
+// ============================================================
+function renderRecipes() {
+  const grid = document.getElementById('recipes-grid');
+  grid.innerHTML = recipes.map((r, i) => `
+    <div class="recipe-card">
+      <img class="recipe-img" src="${r.img}" alt="${r.name}" onerror="this.src='https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=500&q=80'">
+      <div class="recipe-body">
+        <span class="recipe-tag">${r.tag}</span>
+        <h3 id="r-name-${i}" contenteditable="false" data-editable>${r.name}</h3>
+        <p id="r-desc-${i}" contenteditable="false" data-editable>${r.desc}</p>
+        <div class="recipe-meta"><span>⏱ <strong>${r.time}</strong></span><span>👤 <strong>${r.servings} servings</strong></span></div>
+        <button class="edit-btn" onclick="editRecipe(${i})">✏️ Edit</button>
+        <button class="save-btn" id="save-r-${i}" onclick="saveRecipe(${i})">💾 Save</button>
+        <button class="cancel-edit-btn" id="cancel-r-${i}" onclick="cancelRecipe(${i})">Cancel</button>
+      </div>
+    </div>`).join('');
+}
+let recipeBackup = {};
+function editRecipe(i) {
+  if (!isAdmin) return;
+  recipeBackup[i] = { name: document.getElementById('r-name-'+i).innerText, desc: document.getElementById('r-desc-'+i).innerText };
+  document.getElementById('r-name-'+i).setAttribute('contenteditable','true');
+  document.getElementById('r-desc-'+i).setAttribute('contenteditable','true');
+  document.getElementById('save-r-'+i).style.display = 'inline-block';
+  document.getElementById('cancel-r-'+i).style.display = 'inline-block';
+}
+function saveRecipe(i) {
+  document.getElementById('r-name-'+i).setAttribute('contenteditable','false');
+  document.getElementById('r-desc-'+i).setAttribute('contenteditable','false');
+  document.getElementById('save-r-'+i).style.display = 'none';
+  document.getElementById('cancel-r-'+i).style.display = 'none';
+  recipes[i].name = document.getElementById('r-name-'+i).innerText;
+  recipes[i].desc = document.getElementById('r-desc-'+i).innerText;
+  localStorage.setItem('mariasRecipes', JSON.stringify(recipes));
+  showToast('Recipe saved!');
+}
+function cancelRecipe(i) {
+  document.getElementById('r-name-'+i).innerText = recipeBackup[i].name;
+  document.getElementById('r-desc-'+i).innerText = recipeBackup[i].desc;
+  document.getElementById('r-name-'+i).setAttribute('contenteditable','false');
+  document.getElementById('r-desc-'+i).setAttribute('contenteditable','false');
+  document.getElementById('save-r-'+i).style.display = 'none';
+  document.getElementById('cancel-r-'+i).style.display = 'none';
+}
+
+// ============================================================
+// RENDER BLOGS
+// ============================================================
+function renderBlogs() {
+  const list = document.getElementById('blogs-list');
+  list.innerHTML = blogsData.map((b, i) => `
+    <div class="blog-card" id="blog-${b.id}">
+      <img class="blog-hero-img" src="${b.img}" alt="${b.title}" onerror="this.src='https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=900&q=80'">
+      <div class="blog-content">
+        <div class="blog-meta-top">
+          <span class="blog-category">${b.category}</span>
+          <span class="blog-date">${b.date}</span>
+        </div>
+        <h2 id="blog-title-${b.id}" contenteditable="false">${b.title}</h2>
+        <div class="author-line">
+          <img class="author-avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" alt="Maria Kanwal">
+          <div class="author-info"><strong>Maria Kanwal</strong><span>Food Writer & Home Chef</span></div>
+        </div>
+        <div class="blog-text" id="blog-content-${b.id}">${b.content}</div>
+        <img class="blog-img-inline" src="${b.inlineImg}" alt="Recipe" onerror="this.src='https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80'">
+        <div class="key-takeaways">
+          <h4>🌟 Key Takeaways</h4>
+          <ul id="takeaways-${b.id}">${b.takeaways.map(t => `<li>${t}</li>`).join('')}</ul>
+        </div>
+        <div class="faq-section">
+          <h3>Frequently Asked Questions</h3>
+          ${b.faqs.map((f, fi) => `
+            <div class="faq-item">
+              <div class="faq-q" onclick="toggleFaq('faq-${b.id}-${fi}')">
+                <span>${f.q}</span><span id="faq-icon-${b.id}-${fi}">+</span>
+              </div>
+              <div class="faq-a" id="faq-${b.id}-${fi}">${f.a}</div>
+            </div>`).join('')}
+        </div>
+        <div class="conclusion-box">
+          <h3>Conclusion</h3>
+          <p id="conclusion-${b.id}" contenteditable="false">${b.conclusion}</p>
+        </div>
+        <div class="blog-edit-btns">
+          <button class="edit-btn" onclick="editBlog(${i})">✏️ Edit Blog</button>
+          <button class="save-btn" id="save-blog-${b.id}" onclick="saveBlog(${i})">💾 Save Blog</button>
+          <button class="cancel-edit-btn" id="cancel-blog-${b.id}" onclick="cancelBlog(${i})">Cancel</button>
+          <button class="edit-btn" style="background:#e74c3c;color:white;" onclick="deleteBlog(${i})">🗑 Delete</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+let blogBackup = {};
+function editBlog(i) {
+  if (!isAdmin) return;
+  const b = blogsData[i];
+  blogBackup[i] = {
+    title: document.getElementById('blog-title-'+b.id).innerText,
+    content: document.getElementById('blog-content-'+b.id).innerHTML,
+    conclusion: document.getElementById('conclusion-'+b.id).innerText
+  };
+  document.getElementById('blog-title-'+b.id).setAttribute('contenteditable','true');
+  document.getElementById('blog-content-'+b.id).setAttribute('contenteditable','true');
+  document.getElementById('conclusion-'+b.id).setAttribute('contenteditable','true');
+  document.getElementById('save-blog-'+b.id).style.display = 'inline-block';
+  document.getElementById('cancel-blog-'+b.id).style.display = 'inline-block';
+  document.getElementById('save-blog-'+b.id).style.display = 'inline-block';
+}
+function saveBlog(i) {
+  const b = blogsData[i];
+  document.getElementById('blog-title-'+b.id).setAttribute('contenteditable','false');
+  document.getElementById('blog-content-'+b.id).setAttribute('contenteditable','false');
+  document.getElementById('conclusion-'+b.id).setAttribute('contenteditable','false');
+  document.getElementById('save-blog-'+b.id).style.display = 'none';
+  document.getElementById('cancel-blog-'+b.id).style.display = 'none';
+  blogsData[i].title = document.getElementById('blog-title-'+b.id).innerText;
+  blogsData[i].content = document.getElementById('blog-content-'+b.id).innerHTML;
+  blogsData[i].conclusion = document.getElementById('conclusion-'+b.id).innerText;
+  localStorage.setItem('mariasKitchenBlogs', JSON.stringify(blogsData));
+  showToast('Blog saved successfully!');
+}
+function cancelBlog(i) {
+  const b = blogsData[i];
+  if (blogBackup[i]) {
+    document.getElementById('blog-title-'+b.id).innerText = blogBackup[i].title;
+    document.getElementById('blog-content-'+b.id).innerHTML = blogBackup[i].content;
+    document.getElementById('conclusion-'+b.id).innerText = blogBackup[i].conclusion;
+  }
+  document.getElementById('blog-title-'+b.id).setAttribute('contenteditable','false');
+  document.getElementById('blog-content-'+b.id).setAttribute('contenteditable','false');
+  document.getElementById('conclusion-'+b.id).setAttribute('contenteditable','false');
+  document.getElementById('save-blog-'+b.id).style.display = 'none';
+  document.getElementById('cancel-blog-'+b.id).style.display = 'none';
+}
+function deleteBlog(i) {
+  if (!isAdmin) return;
+  if (!confirm('Are you sure you want to delete this blog post?')) return;
+  blogsData.splice(i, 1);
+  localStorage.setItem('mariasKitchenBlogs', JSON.stringify(blogsData));
+  renderBlogs();
+  showToast('Blog deleted.');
+}
+
+function toggleFaq(id) {
+  const a = document.getElementById(id);
+  const icon = document.getElementById('faq-icon-'+id.slice(4));
+  a.classList.toggle('open');
+  if(icon) icon.textContent = a.classList.contains('open') ? '−' : '+';
+}
+
+// ============================================================
+// ADD BLOG MODAL
+// ============================================================
+function openAddBlogModal() {
+  if (!isAdmin) return;
+  document.getElementById('add-blog-modal').classList.add('open');
+}
+function closeAddBlog() {
+  document.getElementById('add-blog-modal').classList.remove('open');
+  ['new-blog-title','new-blog-category','new-blog-img','new-blog-text','new-blog-html'].forEach(id => { document.getElementById(id).value = ''; });
+}
+function switchEditorTab(tab) {
+  document.querySelectorAll('.editor-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.editor-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-'+tab).classList.add('active');
+  event.target.classList.add('active');
+}
+function addNewBlog() {
+  if (!isAdmin) return;
+  const title = document.getElementById('new-blog-title').value.trim();
+  const category = document.getElementById('new-blog-category').value.trim() || 'General';
+  const img = document.getElementById('new-blog-img').value.trim() || 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=900&q=80';
+  const textContent = document.getElementById('new-blog-text').value.trim();
+  const htmlContent = document.getElementById('new-blog-html').value.trim();
+  if (!title) { alert('Please enter a blog title.'); return; }
+  const content = htmlContent || (textContent ? textContent.split('\n\n').map(p => `<p>${p.replace(/\n/g,'<br>')}</p>`).join('') : '<p>Start writing your blog content here...</p>');
+  const newBlog = {
+    id: Date.now(),
+    title, category,
+    date: new Date().toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' }),
+    img, inlineImg: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80',
+    content,
+    takeaways: ['Share your key insight here', 'Another important takeaway', 'A third point to remember'],
+    faqs: [
+      { q: 'Your first FAQ question?', a: 'Your answer here.' },
+      { q: 'Another question your readers might have?', a: 'Answer it here.' },
+      { q: 'What else should readers know?', a: 'Provide helpful guidance.' }
+    ],
+    conclusion: 'Add your conclusion here — wrap up your blog post with a memorable closing thought.'
+  };
+  blogsData.unshift(newBlog);
+  localStorage.setItem('mariasKitchenBlogs', JSON.stringify(blogsData));
+  renderBlogs();
+  closeAddBlog();
+  showToast('New blog published! 🎉');
+  showSection('blogs');
+}
+
+// ============================================================
+// CONTACT FORM
+// ============================================================
+function submitContact() {
+  showToast('Message sent! Maria will get back to you soon. 💌');
+}
+
+// ============================================================
+// TOAST
+// ============================================================
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ============================================================
+// INIT
+// ============================================================
+window.addEventListener('DOMContentLoaded', () => {
+  renderRecipes();
+  renderBlogs();
+  loadAboutData();
+  loadContactData();
+});
+</script>
+</body>
+</html>
